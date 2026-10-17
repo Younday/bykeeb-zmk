@@ -88,6 +88,71 @@ def parse():
     return layers, raw_layers, positions
 
 
+def reference_metadata(layers, raw):
+    """Read the settings referenced by the generated instructions, or fail closed."""
+    source = re.sub(r"/\*.*?\*/|//[^\n]*", "", KEYMAP.read_text(), flags=re.S)
+    constants = {name: int(n) for name, n in re.findall(r"#define\s+(\w+)\s+(\d+)", source)}
+    names = list(layers)
+    combos = []
+    combo_timings = []
+    settings = {}
+    for node, body in re.findall(r"(\w+)\s*\{([^{}]*)\};", source, re.S):
+        match = re.search(r"^\s*key-positions\s*=\s*<([^>]+)>;", body, re.M)
+        if match:
+            positions = [int(n) for n in match[1].split()]
+            if not positions or any(p < 0 or p >= 36 for p in positions):
+                raise ValueError(f"Invalid combo positions: {node}")
+            binding = re.search(r"bindings\s*=\s*<\s*&kp\s+(\S+)\s*>;", body)
+            if not binding:
+                raise ValueError(f"Unsupported combo binding: {node}")
+            scope = re.search(r"layers\s*=\s*<([^>]+)>;", body)
+            combo = {"p": positions, "k": label(binding[1])}
+            if scope:
+                indices = [constants[s] if s in constants else int(s) for s in scope[1].split()]
+                if any(i < 0 or i >= len(names) for i in indices):
+                    raise ValueError(f"Invalid combo layers: {node}")
+                combo["l"] = [names[i] for i in indices]
+            combos.append(combo)
+            timing = []
+            for prop, text in (("timeout-ms", "chord window"), ("require-prior-idle-ms", "prior idle")):
+                match = re.search(rf"{prop}\s*=\s*<(\d+)>;", body)
+                if match:
+                    timing.append(f"{text} {match[1]} ms")
+            combo_timings.append(timing)
+        if node in ("homerow_mod_left", "homerow_mod_right"):
+            values = {}
+            for prop in ("tapping-term-ms", "require-prior-idle-ms", "quick-tap-ms"):
+                match = re.search(rf"{prop}\s*=\s*<(\d+)>;", body)
+                if not match:
+                    raise ValueError(f"Missing {prop} in {node}")
+                values[prop] = int(match[1])
+            settings[node] = values
+    if set(settings) != {"homerow_mod_left", "homerow_mod_right"}:
+        raise ValueError("Expected left and right home-row behaviors")
+    summaries = []
+    for combo, details in zip(combos, combo_timings):
+        keys = " + ".join(layers['default'][p]['t'] for p in combo['p'])
+        scope = ", ".join(combo.get('l', names))
+        scope = '; '.join([scope, *details])
+        summaries.append(f"{keys} → {combo['k']} ({scope})")
+    timing = "; ".join(
+        f"{side}: hold {settings[node]['tapping-term-ms']} ms, "
+        f"prior idle {settings[node]['require-prior-idle-ms']} ms, "
+        f"quick tap {settings[node]['quick-tap-ms']} ms"
+        for side, node in (("Left", "homerow_mod_left"), ("Right", "homerow_mod_right")))
+    unlocks = []
+    for index, (name, bindings) in enumerate(raw.items()):
+        for pos, binding in enumerate(bindings):
+            if binding != '&studio_unlock':
+                continue
+            activators = [layers['default'][p]['t'] for p, b in enumerate(raw['default'])
+                          if b.startswith('&lt ') and constants[b.split()[1]] == index]
+            target = layers['default'][pos]['t']
+            prefix = f"Hold {' or '.join(activators)} and press" if activators else f"On {name}, press"
+            unlocks.append(f"{prefix} {target} to unlock editing.")
+    return combos, summaries, timing, ' '.join(unlocks) or 'No Studio unlock binding is defined.'
+
+
 def draw_layer(name, keys, raw, positions, offset):
     out = [f'<g class="layer" data-layer="{name}" transform="translate(24 {offset})">',
            f'<text class="layer-title" x="0" y="24">{name.upper()}</text>']
@@ -135,13 +200,15 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 
 def outputs():
     layers, raw, positions = parse()
+    combos, summaries, timing, studio = reference_metadata(layers, raw)
+    combo_text = '; '.join(summaries) or 'None'
     panels = [draw_layer(name, keys, raw[name], positions, 12 + i * 418)
               for i, (name, keys) in enumerate(layers.items())]
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="944" height="2980" '
            'viewBox="0 0 944 2980" role="img" aria-label="Bykeeb seven-layer keymap">\n'
            f'<style>{STYLE}</style>\n<rect width="944" height="2980" style="fill:#fafaf7;stroke:none"/>\n' + '\n'.join(panels) +
            '<text x="24" y="2960" style="text-anchor:start">'
-           'Tap: main label · Hold: green label · ▽: underlying layer · Base combo: Z + X → Ctrl+Z'
+           'Tap: main label · Hold: green label · ▽: underlying layer · Combos: ' + html.escape(combo_text) +
            '</text>\n</svg>\n')
     options = ''.join(f'<option value="{name}">{name.upper()}</option>' for name in layers)
     single_svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 944 420" '
@@ -164,10 +231,11 @@ __LAYER_SVG__
 <p>Tap the main label; hold for the green label. ▽ falls through to an underlying active layer.
 Hover a key to see its ZMK binding. Hold labels on the base layer show how to reach other layers.</p>
 <aside><p><strong>Home-row modifiers:</strong> use the modifier on the opposite hand to your target key.
-After typing, pause briefly before a shortcut. Same-hand shortcuts need a deliberate hold (280 ms).
+After typing, pause briefly before a shortcut. Same-hand shortcuts need a deliberate hold.
 Tap then quickly hold a letter to repeat it.</p>
-<p><strong>Undo:</strong> press Z + X together on the base layer, after a short pause.
-<strong>Studio:</strong> hold Backspace and press Q to unlock editing.</p>
+<p><strong>Configured timings:</strong> __TIMING__.</p>
+<p><strong>Combos (base key labels):</strong> __COMBOS__.</p>
+<p><strong>Studio:</strong> __STUDIO__</p>
 <p>This reference shows the firmware defaults. Changes saved in ZMK Studio are stored on the keyboard
 and are not reflected here. Use the SVG file for printing all layers.</p></aside>
 <script>
@@ -175,8 +243,10 @@ const selector=document.getElementById('layer');
 function showLayer(){document.querySelectorAll('.layer').forEach(layer=>layer.classList.toggle('active',layer.dataset.layer===selector.value));}
 selector.addEventListener('change',showLayer);showLayer();
 </script></html>
-'''.replace('OPTIONS', options).replace('__LAYER_SVG__', single_svg)
-    data = {"layers": layers, "combos": [{"p": [20, 21], "k": "Ctrl+Z", "l": ["default"]}]}
+'''.replace('OPTIONS', options).replace('__LAYER_SVG__', single_svg).replace(
+        '__TIMING__', html.escape(timing)).replace('__COMBOS__', html.escape(combo_text)).replace(
+        '__STUDIO__', html.escape(studio))
+    data = {"layers": layers, "combos": combos}
     return {"keymap-drawer/bykeeb.svg": svg,
             "keymap-drawer/bykeeb.yaml": json.dumps(data, ensure_ascii=False, indent=2) + '\n',
             "docs/layout.html": page}
