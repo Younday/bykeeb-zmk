@@ -15,11 +15,11 @@
       },
       {
         "t": "T",
-        "h": "NUMLFT"
+        "h": "NUM right"
       },
       {
         "t": "Y",
-        "h": "NUMRHT"
+        "h": "NUM left"
       },
       {
         "t": "U"
@@ -121,7 +121,8 @@
         "h": "SYM"
       },
       {
-        "t": "'"
+        "t": "Shift",
+        "h": "Sticky on tap"
       }
     ],
     "colemak": [
@@ -139,11 +140,11 @@
       },
       {
         "t": "B",
-        "h": "NUMLFT"
+        "h": "NUM right"
       },
       {
         "t": "J",
-        "h": "NUMRHT"
+        "h": "NUM left"
       },
       {
         "t": "L"
@@ -245,7 +246,8 @@
         "h": "SYM"
       },
       {
-        "t": "'"
+        "t": "Shift",
+        "h": "Sticky on tap"
       }
     ],
     "nav": [
@@ -253,35 +255,49 @@
         "t": "Esc"
       },
       {
+        "t": "Ctrl+Z"
+      },
+      {
+        "t": "Ctrl+X"
+      },
+      {
+        "t": "Ctrl+C"
+      },
+      {
+        "t": "Ctrl+V"
+      },
+      {
         "t": "PgUp"
+      },
+      {
+        "t": "Home"
       },
       {
         "t": "↑"
       },
       {
+        "t": "End"
+      },
+      {
+        "t": "Ctrl+Delete"
+      },
+      {
+        "t": "Ctrl"
+      },
+      {
+        "t": "GUI"
+      },
+      {
+        "t": "Alt"
+      },
+      {
+        "t": "Shift"
+      },
+      {
+        "t": "Ctrl+Bksp"
+      },
+      {
         "t": "PgDn"
-      },
-      {
-        "t": "▽",
-        "type": "trans"
-      },
-      {
-        "t": "*"
-      },
-      {
-        "t": "7"
-      },
-      {
-        "t": "8"
-      },
-      {
-        "t": "9"
-      },
-      {
-        "t": "−"
-      },
-      {
-        "t": "Home"
       },
       {
         "t": "←"
@@ -293,57 +309,37 @@
         "t": "→"
       },
       {
-        "t": "End"
+        "t": "Delete"
       },
       {
-        "t": "/"
+        "t": "Ctrl+←"
       },
       {
-        "t": "4"
+        "t": "Ctrl+→"
       },
       {
-        "t": "5"
+        "t": "Ctrl+Shift+←"
       },
       {
-        "t": "6"
+        "t": "Ctrl+Shift+→"
       },
       {
-        "t": "+"
+        "t": "Clear term line"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Ctrl+Home"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Select word"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Select line"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Ctrl+End"
       },
       {
-        "t": "▽",
-        "type": "trans"
-      },
-      {
-        "t": "="
-      },
-      {
-        "t": "1"
-      },
-      {
-        "t": "2"
-      },
-      {
-        "t": "3"
-      },
-      {
-        "t": "0"
+        "t": "Ctrl+Bksp"
       },
       {
         "t": "▽",
@@ -363,7 +359,8 @@
         "t": "Space"
       },
       {
-        "t": "."
+        "t": "Shift",
+        "h": "Sticky on tap"
       }
     ],
     "sym": [
@@ -477,8 +474,7 @@
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "'"
       }
     ],
     "func": [
@@ -744,8 +740,7 @@
         "t": "9"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "−"
       },
       {
         "t": "▽",
@@ -764,8 +759,7 @@
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Esc / exit NUM"
       },
       {
         "t": "Left click"
@@ -780,28 +774,23 @@
         "t": "6"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "+"
       },
       {
         "t": "▽",
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Shift"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "AltGr"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "GUI"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Ctrl"
       },
       {
         "t": "Right click"
@@ -839,34 +828,27 @@
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Delete"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Enter"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Tab"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Bksp"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Space"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "."
       }
     ],
     "numrht": [
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Esc / exit NUM"
       },
       {
         "t": "▽",
@@ -885,8 +867,7 @@
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "*"
       },
       {
         "t": "7"
@@ -901,28 +882,23 @@
         "t": "−"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Ctrl"
+      },
+      {
+        "t": "GUI"
+      },
+      {
+        "t": "Alt"
+      },
+      {
+        "t": "Shift"
       },
       {
         "t": "▽",
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
-      },
-      {
-        "t": "▽",
-        "type": "trans"
-      },
-      {
-        "t": "▽",
-        "type": "trans"
-      },
-      {
-        "t": "▽",
-        "type": "trans"
+        "t": "/"
       },
       {
         "t": "4"
@@ -957,8 +933,7 @@
         "type": "trans"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "="
       },
       {
         "t": "1"
@@ -973,8 +948,58 @@
         "t": "0"
       },
       {
+        "t": "Delete"
+      },
+      {
+        "t": "Enter"
+      },
+      {
+        "t": "Tab"
+      },
+      {
+        "t": "Bksp"
+      },
+      {
+        "t": "Space"
+      },
+      {
+        "t": "."
+      }
+    ],
+    "numword": [
+      {
+        "t": "Esc / exit NUM"
+      },
+      {
         "t": "▽",
         "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "*"
+      },
+      {
+        "t": "7"
+      },
+      {
+        "t": "8"
+      },
+      {
+        "t": "9"
+      },
+      {
+        "t": "−"
       },
       {
         "t": "▽",
@@ -995,6 +1020,74 @@
       {
         "t": "▽",
         "type": "trans"
+      },
+      {
+        "t": "/"
+      },
+      {
+        "t": "4"
+      },
+      {
+        "t": "5"
+      },
+      {
+        "t": "6"
+      },
+      {
+        "t": "+"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "="
+      },
+      {
+        "t": "1"
+      },
+      {
+        "t": "2"
+      },
+      {
+        "t": "3"
+      },
+      {
+        "t": "0"
+      },
+      {
+        "t": "Delete"
+      },
+      {
+        "t": "Enter"
+      },
+      {
+        "t": "Tab"
+      },
+      {
+        "t": "Bksp"
+      },
+      {
+        "t": "Space"
+      },
+      {
+        "t": "."
       }
     ]
   },
@@ -1008,6 +1101,31 @@
       "l": [
         "default",
         "colemak"
+      ]
+    },
+    {
+      "p": [
+        31,
+        34
+      ],
+      "k": "Lock NUM right",
+      "l": [
+        "default",
+        "colemak",
+        "numlft",
+        "numrht"
+      ]
+    },
+    {
+      "p": [
+        32,
+        34
+      ],
+      "k": "Auto Numword",
+      "l": [
+        "default",
+        "colemak",
+        "numword"
       ]
     }
   ]

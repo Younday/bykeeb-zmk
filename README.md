@@ -1,9 +1,10 @@
 # Bykeeb ZMK configuration
 
 36-key split with switchable QWERTY and Colemak-DH for two Seeed XIAO nRF52840
-controllers, with upstream ZMK, Studio support and positional home-row modifiers.
+controllers, with upstream ZMK, Studio support, positional home-row modifiers,
+opposite-hand layers, sticky Shift and optional numeric modes.
 
-![Both base layouts and six shared layers](keymap-drawer/bykeeb.svg)
+![Both base layouts and seven shared layers](keymap-drawer/bykeeb.svg)
 
 Download and open [the interactive layer reference](docs/layout.html) in a browser,
 or zoom and print [the SVG](keymap-drawer/bykeeb.svg). Display geometry follows
@@ -53,9 +54,16 @@ Z X C D V    K H , . /
 ```
 
 Tap for the main legend; hold for the second action.
-Thumbs, left to right: Delete, Enter/NAV, Tab/FUNC, Backspace/MEDIA, Space/SYM, quote.
-The number-layer holds stay at the same physical positions: T/Y in QWERTY,
-B/J in Colemak-DH for the left/right number layers respectively.
+Thumbs, left to right: Delete, Enter/NAV, Tab/FUNC, Backspace/MEDIA, Space/SYM,
+sticky Shift. Quote has moved to the rightmost thumb under SYM: hold Space and
+tap the Shift thumb. Hold Shift as well for a double quote.
+
+The number-layer holds stay on the top inner letter of each half, but now operate
+the **opposite** hand: hold T (QWERTY) / B (Colemak-DH) for the right numpad;
+hold Y / J for the left numpad. These letter holds use positional roll protection,
+with the same 280/150/175 ms settings as the home-row mods. After fast typing,
+pause briefly before starting a number-layer hold. You can also use the thumb
+combos below, which do not require that prior-idle pause.
 
 Home-row modifiers also stay on the same fingers:
 
@@ -65,16 +73,104 @@ Home-row modifiers also stay on the same fingers:
 | QWERTY tap | A | S | D | F | J | K | L | ; |
 | Colemak-DH tap | A | R | S | T | N | E | I | O |
 
-The six shared layers, mouse buttons and Backspace/MEDIA behavior are retained.
-On MEDIA, **Q unlocks Studio**. Z + X Undo works on both base layouts
+On MEDIA, **Q unlocks Studio**. Bluetooth clearing is still MEDIA + the right
+half's leftmost home-row key (H in QWERTY, M in Colemak-DH).
+Z + X Undo works on both base layouts
 and requires 150 ms prior idle to reduce accidental activation during typing.
 Colemak-DH moves V to the old B position, so Ctrl+V moves with it.
 
 After flashing this update, if you have previously saved mappings in Studio,
 record any edits you want to keep and choose **Restore Stock Settings** in Studio
-to load the new eight-layer mapping. Inserting the Colemak base changes shared
-layer indices; an older saved mapping will not match these compiled defaults.
+to load the new **nine-layer mapping**. This revision changes NAV and numeric
+bindings, changes the quote thumb to Shift, and adds a separate Numword layer.
 This restores the keymap, without requiring settings-reset recovery firmware.
+
+## Numbers without same-hand holds
+
+| Action | Shortcut | Result |
+|---|---|---|
+| Brief right-hand number entry | Hold T / Colemak B | Right numpad, plain left modifiers |
+| Brief left-hand number entry | Hold Y / Colemak J | Left numpad, plain right modifiers and existing mouse buttons |
+| Lock/unlock right numpad | Chord **Enter + Space** | Release both thumbs and type numbers without holding a key |
+| Start/stop Numword | Chord **Tab + Space** | Right numpad that exits automatically |
+
+Press both thumb-combo keys within 50 ms. A combo consumes the underlying thumb
+actions. Enter+Space also locks the right numpad when it was activated by a letter
+hold. Press Enter+Space again to unlock it. Releasing the original letter hold
+does not undo the lock. While that original hold remains pressed, toggling the
+lock off also disables the layer; release and re-hold the letter to reactivate it.
+
+The right numpad is:
+
+```text
+* 7 8 9 -
+/ 4 5 6 +
+= 1 2 3 0
+```
+
+Numeric thumbs are plain Delete, Enter, Tab, Backspace, Space and decimal point,
+so holding Backspace repeats. Enter confirms normally, without entering NAV.
+
+Numword continues on digits, Backspace, Delete and arithmetic punctuation.
+Space, Enter, Tab or other non-continuation keys exit it **and still reach the
+application**. The left half remains available for letters; a right-hand letter
+at a numpad position still produces a number. For example, to type `12h` in
+Colemak, cancel Numword before H, or H's physical key will produce `1`.
+Tab+Space again cancels Numword without sending any application key.
+
+Numeric modes are deliberately exclusive: the lock combo is disabled during
+Numword, and the Numword combo is disabled during a numeric hold or manual lock.
+Switch the current mode off before entering the other. The number layers expose
+**Esc / exit NUM** on the unused top pinky: Q position for right numpad/Numword,
+P position for left numpad. It sends Escape, cancels auto-mode and clears numeric
+locks without changing your selected base. Escape can also cancel an application
+operation (for instance, leave Vim insert mode); use the mode's thumb combo if
+you want to exit a lock or Numword without sending Escape.
+
+## Navigation and editing
+
+Hold **Enter** with your left thumb. The arrows are now on the **right** hand:
+Up on the middle finger's top row; Left/Down/Right on index/middle/ring home row.
+Home/End sit beside Up, Page Up/Down on the inner column, Delete on the pinky.
+The left home row is plain Ctrl/GUI/Alt/Shift in the same modifier positions as
+the base. Hold the layer first to use these direct modifiers; the base HRMs also
+continue to work if held before entering NAV. The thumb hold itself still uses
+the ordinary 200 ms layer-tap threshold.
+
+| Editing action | NAV position (QWERTY / Colemak-DH) |
+|---|---|
+| Undo, cut, copy, paste | W, E/F, R/P, T/B |
+| Delete previous word | G or / |
+| Delete next word | P / ; |
+| Previous/next word | Z / X |
+| Select previous/next word boundary | C / V (Colemak C / D) |
+| Select current word | M / H |
+| Select current line | comma |
+| Clear current terminal input line | B / V |
+| Start/end of document | N / K and dot |
+
+Word selection sends Ctrl+Right, Ctrl+Left, Ctrl+Shift+Right each time; it does
+not implement Getreuer's stateful extension across successive words. Line
+selection sends Home, Shift+End. These assume conventional Linux/Windows editor
+shortcuts. Terminal/Codex inputs often interpret these keys differently and do
+not provide GUI-style highlighting. **Clear current terminal input line** sends
+Ctrl+E, Ctrl+U for readline-style inputs (one logical line, not an entire
+multiline prompt); use it without other modifiers held. It sends no Enter.
+
+## Sticky Shift and Backspace repetition
+
+The rightmost thumb now has a dedicated sticky Shift, without tap-hold timing:
+tap and release, then type a capital; or hold it while typing for ordinary Shift.
+An unused tap expires after 1500 ms. Quick release prevents it from capitalizing
+a following rolled key. Existing Shift HRMs remain for multi-modifier shortcuts.
+Caps Word is still **Space/SYM + G** for identifiers such as `MY_CONSTANT`.
+
+Backspace still holds MEDIA after 200 ms. To repeat deletion, **tap Backspace,
+then quickly press and hold it again**, starting the second press within 200 ms
+of the first press. During that window the second press cannot activate MEDIA;
+pause before entering MEDIA immediately after a deletion. This repeat setting
+is local to Backspace, not applied to Enter, Tab or Space. NAV, SYM and numeric
+layers also provide a plain repeating Backspace.
 
 ## Home-row modifier tuning
 
@@ -102,8 +198,8 @@ Edit both behaviors in
 | Same-hand shortcuts feel slow | Decrease tapping term cautiously |
 | Mid-word Shift is missed | Give Shift a separate behavior with less prior idle, or consider dedicated/sticky thumb Shift |
 
-These defaults need real typing validation. Shift has the same protection as other
-modifiers; fast mid-word capitals may require tuning. No thumb is reassigned.
+These defaults need real typing validation. Shift HRMs have the same protection as
+other modifiers; use the dedicated sticky thumb Shift for fast capitals.
 Mouse modifier clicks require waiting for the hold threshold; eager modifiers
 (`hold-while-undecided`) are not enabled.
 
@@ -141,7 +237,7 @@ This generates the SVG, interactive HTML and JSON-compatible YAML directly from
 the firmware keymap using only Python's standard library. Layout CI rejects stale
 diagrams. Add parser/label support when introducing a new behavior.
 The renderer checks each 36-key layer and its index; it does not replace a firmware build.
-Both bases precede the six shared layers so NAV, SYM and other layers override
+Both bases precede the seven shared layers so NAV, SYM and other layers override
 the selected base, with transparent keys falling through to that base.
 
 ## Firmware dependencies
@@ -151,7 +247,11 @@ the selected base, with transparent keys falling through to that base.
 `10ba6d0cb38bc3d258775d27982f707599320085`.
 This is a development snapshot, not a claim that v0.4 has been released.
 The build workflow uses the same ZMK revision; imported modules use the revisions
-in those pinned manifests.
+in those pinned manifests. Numword uses
+[`urob/zmk-auto-layer`](https://github.com/urob/zmk-auto-layer) pinned to
+`b50d514219c5ad61198f9a8be137c59d0674b11c`. Basic numeric locking, sticky Shift,
+hold-taps and editing macros use upstream ZMK behaviors. The auto-layer behavior
+is invoked by the compiled thumb combo; its properties are configured in source.
 
 The old pointer fork, chiptuner and Fingerpunch dependencies are removed. This
 shield uses ordinary GPIO matrix scanning and upstream mouse buttons; no attached
@@ -162,7 +262,39 @@ support. The original 30-minute deep sleep remains in `config/bykeeb.conf`.
 Future upgrades should deliberately update the ZMK/Zephyr pins and matching
 workflow revision, then build both halves and check the layout references.
 
+## Validate this revision on the keyboard
+
+After the builds pass, flash both halves and restore stock mappings if Studio
+has saved edits. Check both bases, then:
+
+1. Hold the top inner left letter, type right-hand digits, release: letters return.
+   Repeat with the right hold and left digits. Check fast rolls of the base letters.
+2. Enter+Space: release both, type digits, Enter+Space again: letters return.
+   Also lock while the letter hold is down, then release it: digits must remain.
+3. Tab+Space: type `123.45`, Space, then letters: automatic exit. Repeat with
+   Enter and Tab. Check manual cancellation before a right-hand letter.
+4. Exit numeric modes with Escape and confirm Colemak stays selected. Check
+   mode exclusion; do not expect a disabled combo to switch between numeric modes.
+5. Hold Enter, then plain Ctrl/Shift and right arrows; test word/line selection
+   in an editor and clear-line in a disposable terminal input without executing it.
+6. Tap Shift then roll two letters: only the first should be capitalized. Hold
+   Shift for multiple capitals; leave an unused tap idle past its timeout.
+7. Tap-then-hold Backspace: deletion repeats. A normal hold still accesses MEDIA.
+   Check Studio unlock, Bluetooth profile selection and QWERTY/Colemak switching.
+
+Firmware compilation and the reference regression tests do not substitute for
+these physical typing checks. The newly built pair is a candidate for testing.
+
 ## Related configurations reviewed
+
+- [Getreuer's HRM article](https://getreuer.info/posts/keyboards/hrms-are-hard/index.html)
+  supports the retained balanced/positional configuration and a separate Shift.
+  [His keymap](https://github.com/getreuer/qmk-keymap) inspired layer locking,
+  direct navigation modifiers and editing macros; its Magic Sturdy base is not used.
+- [Miryoku](https://github.com/manna-harbour/miryoku/tree/master/docs/reference)
+  motivates opposite-hand layer access and plain modifiers on the holding side.
+- [urob's config](https://github.com/urob/zmk-config) explains timeless HRMs and
+  Numword's benefits and limitations. Only the auto-layer module is added here.
 
 - [Vianney's Bykeeb config](https://github.com/vianneyrenata/zmk-config-bykeeb)
   demonstrates upstream pointing, dedicated thumb Shift and a recovery build.

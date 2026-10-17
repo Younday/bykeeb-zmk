@@ -12,8 +12,19 @@ KEYMAP = ROOT / "boards/shields/bykeeb/bykeeb.keymap"
 LAYOUT = ROOT / "boards/shields/bykeeb/bykeeb-layouts.dtsi"
 ARITY = {"kp": 1, "hml": 2, "hmr": 2, "lt": 2, "trans": 0,
          "caps_word": 0, "bootloader": 0, "sys_reset": 0, "bt": 1,
-         "ext_power": 1, "out": 1, "mkp": 1, "studio_unlock": 0, "to": 1}
-LAYER_LABELS = {"default": "QWERTY", "colemak": "Colemak-DH"}
+         "ext_power": 1, "out": 1, "mkp": 1, "studio_unlock": 0, "to": 1,
+         "nml": 2, "nmr": 2, "bsp": 2, "skq": 1, "tog": 1, "num_word": 1,
+         "num_off": 1, "select_word": 0, "select_line": 0, "clear_line": 0, "num_exit": 0}
+LAYER_TAPS = {"lt", "nml", "nmr", "bsp"}
+LAYER_LABELS = {"default": "QWERTY", "colemak": "Colemak-DH",
+                "numlft": "NUM left", "numrht": "NUM right", "numword": "Numword"}
+ACTION_LABELS = {"caps_word": "Caps Word", "bootloader": "Bootloader",
+                 "sys_reset": "Reset", "studio_unlock": "Unlock Studio",
+                 "select_word": "Select word", "select_line": "Select line",
+                 "clear_line": "Clear term line", "num_exit": "Esc / exit NUM"}
+HOLD_NODES = {"homerow_mod_left": "Left", "homerow_mod_right": "Right",
+              "backspace_media": "Backspace/MEDIA", "number_hold_left": "Left letter/NUM",
+              "number_hold_right": "Right letter/NUM"}
 LABELS = {
     "LCTL": "Ctrl", "RCTL": "Ctrl", "LGUI": "GUI", "RGUI": "GUI",
     "LALT": "Alt", "RALT": "AltGr", "LSHIFT": "Shift", "RSHIFT": "Shift",
@@ -49,38 +60,46 @@ def layer_label(name):
     return LAYER_LABELS.get(name, name.upper())
 
 
+def binding_key(binding, constants, names):
+    """Validate and label a layer or combo binding using the same rules."""
+    parts = binding[1:].split()
+    behavior, args = parts[0], parts[1:]
+    arity = 2 if behavior == "bt" and args and args[0] == "BT_SEL" else ARITY.get(behavior)
+    if arity is None or len(args) != arity:
+        raise ValueError(f"Unsupported binding: {binding}")
+    if behavior in LAYER_TAPS | {"to", "tog", "num_word", "num_off"}:
+        if args[0] not in constants or not 0 <= constants[args[0]] < len(names):
+            raise ValueError(f"Unknown layer {args[0]}")
+        target = layer_label(names[constants[args[0]]])
+        if behavior in LAYER_TAPS:
+            return {"t": label(args[1]), "h": target}
+        prefix = {"to": "Use ", "tog": "Lock ", "num_word": "Auto ", "num_off": "Exit "}[behavior]
+        return {"t": prefix + target}
+    if behavior in ("hml", "hmr"):
+        return {"t": label(args[1]), "h": label(args[0])}
+    if behavior == "trans":
+        return {"t": "▽", "type": "trans"}
+    if behavior == "skq":
+        return {"t": label(args[0]), "h": "Sticky on tap"}
+    if behavior == "bt" and args[0] == "BT_SEL":
+        return {"t": f"BT {int(args[1]) + 1}"}
+    if behavior in ("kp", "bt", "out", "mkp", "ext_power"):
+        return {"t": label(args[0])}
+    return {"t": ACTION_LABELS[behavior]}
+
+
 def parse():
     source = re.sub(r"/\*.*?\*/|//[^\n]*", "", KEYMAP.read_text(), flags=re.S)
     constants = {name: int(n) for name, n in re.findall(r"#define\s+(\w+)\s+(\d+)", source)}
     layers = {}
     raw_layers = {}
-    for name, body in re.findall(r"(\w+)_layer\s*\{\s*bindings\s*=\s*<(.*?)>;", source, re.S):
+    definitions = re.findall(r"(\w+)_layer\s*\{\s*bindings\s*=\s*<(.*?)>;", source, re.S)
+    names = [name for name, _ in definitions]
+    for name, body in definitions:
         raw = [b.strip() for b in re.findall(r"&[^&]+", body)]
         if len(raw) != 36:
             raise ValueError(f"{name}: expected 36 bindings, got {len(raw)}")
-        keys = []
-        for binding in raw:
-            parts = binding[1:].split()
-            behavior, args = parts[0], parts[1:]
-            arity = 2 if behavior == "bt" and args and args[0] == "BT_SEL" else ARITY.get(behavior)
-            if arity is None or len(args) != arity:
-                raise ValueError(f"Unsupported binding: {binding}")
-            if behavior in ("hml", "hmr", "lt"):
-                if behavior == "lt" and args[0] not in constants:
-                    raise ValueError(f"Unknown layer {args[0]}")
-                key = {"t": label(args[1]), "h": label(args[0])}
-            elif behavior == "trans":
-                key = {"t": "▽", "type": "trans"}
-            elif behavior == "to":
-                key = {"t": "Use " + args[0]}
-            elif behavior == "bt" and args[0] == "BT_SEL":
-                key = {"t": f"BT {int(args[1]) + 1}"}
-            elif behavior in ("kp", "bt", "out", "mkp", "ext_power"):
-                key = {"t": label(args[0])}
-            else:
-                key = {"t": {"caps_word": "Caps Word", "bootloader": "Bootloader",
-                             "sys_reset": "Reset", "studio_unlock": "Unlock Studio"}[behavior]}
-            keys.append(key)
+        keys = [binding_key(binding, constants, names) for binding in raw]
         layers[name] = keys
         raw_layers[name] = raw
     if not layers or list(layers)[0] != "default":
@@ -89,13 +108,6 @@ def parse():
     for index, name in enumerate(names):
         if constants.get(name.upper()) != index:
             raise ValueError(f"Layer index mismatch for {name}")
-    for name, bindings in raw_layers.items():
-        for index, binding in enumerate(bindings):
-            if binding.startswith('&to '):
-                target = binding.split()[1]
-                if target not in constants or constants[target] >= len(names):
-                    raise ValueError(f"Unknown layer {target}")
-                layers[name][index] = {"t": "Use " + layer_label(names[constants[target]])}
     positions = []
     for body in re.findall(r"<&key_physical_attrs\s+([^>]+)>", LAYOUT.read_text()):
         values = [int(n) for n in re.findall(r"-?\d+", body)]
@@ -121,11 +133,11 @@ def reference_metadata(layers, raw):
             positions = [int(n) for n in match[1].split()]
             if not positions or any(p < 0 or p >= 36 for p in positions):
                 raise ValueError(f"Invalid combo positions: {node}")
-            binding = re.search(r"bindings\s*=\s*<\s*&kp\s+(\S+)\s*>;", body)
+            binding = re.search(r"bindings\s*=\s*<\s*(&[^>]+)\s*>;", body)
             if not binding:
                 raise ValueError(f"Unsupported combo binding: {node}")
             scope = re.search(r"layers\s*=\s*<([^>]+)>;", body)
-            combo = {"p": positions, "k": label(binding[1])}
+            combo = {"p": positions, "k": binding_key(binding[1].strip(), constants, names)['t']}
             if scope:
                 indices = [constants[s] if s in constants else int(s) for s in scope[1].split()]
                 if any(i < 0 or i >= len(names) for i in indices):
@@ -138,27 +150,42 @@ def reference_metadata(layers, raw):
                 if match:
                     timing.append(f"{text} {match[1]} ms")
             combo_timings.append(timing)
-        if node in ("homerow_mod_left", "homerow_mod_right"):
+        if node in HOLD_NODES:
             values = {}
             for prop in ("tapping-term-ms", "require-prior-idle-ms", "quick-tap-ms"):
                 match = re.search(rf"{prop}\s*=\s*<(\d+)>;", body)
                 if not match:
+                    if prop == "require-prior-idle-ms" and node == "backspace_media":
+                        continue
                     raise ValueError(f"Missing {prop} in {node}")
                 values[prop] = int(match[1])
             settings[node] = values
-    if set(settings) != {"homerow_mod_left", "homerow_mod_right"}:
-        raise ValueError("Expected left and right home-row behaviors")
+        if node == "sticky_shift":
+            timeout = re.search(r"release-after-ms\s*=\s*<(\d+)>;", body)
+            if not timeout:
+                raise ValueError("Missing sticky Shift timeout")
+            settings[node] = {"timeout": int(timeout[1]),
+                              "quick-release": bool(re.search(r"\bquick-release\s*;", body))}
+    if set(settings) != set(HOLD_NODES) | {"sticky_shift"}:
+        raise ValueError("Expected configured hold-taps and sticky Shift")
     summaries = []
     for combo, details in zip(combos, combo_timings):
         keys = " + ".join(layers['default'][p]['t'] for p in combo['p'])
         scope = ", ".join(combo.get('l', names))
         scope = '; '.join([scope, *details])
         summaries.append(f"{keys} → {combo['k']} ({scope})")
-    timing = "; ".join(
-        f"{side}: hold {settings[node]['tapping-term-ms']} ms, "
-        f"prior idle {settings[node]['require-prior-idle-ms']} ms, "
-        f"quick tap {settings[node]['quick-tap-ms']} ms"
-        for side, node in (("Left", "homerow_mod_left"), ("Right", "homerow_mod_right")))
+    timings = []
+    for node, side in HOLD_NODES.items():
+        values = settings[node]
+        parts = [f"hold {values['tapping-term-ms']} ms"]
+        if 'require-prior-idle-ms' in values:
+            parts.append(f"prior idle {values['require-prior-idle-ms']} ms")
+        parts.append(f"quick tap {values['quick-tap-ms']} ms")
+        timings.append(f"{side}: " + ', '.join(parts))
+    sticky = settings['sticky_shift']
+    timings.append(f"Sticky Shift: timeout {sticky['timeout']} ms, " +
+                   ('release on next press' if sticky['quick-release'] else 'release on next release'))
+    timing = '; '.join(timings)
     unlocks = []
     switches = []
     for index, (name, bindings) in enumerate(raw.items()):
@@ -166,7 +193,7 @@ def reference_metadata(layers, raw):
             if binding != '&studio_unlock' and not binding.startswith('&to '):
                 continue
             activators = [layers['default'][p]['t'] for p, b in enumerate(raw['default'])
-                          if b.startswith('&lt ') and constants[b.split()[1]] == index]
+                          if b.split()[0][1:] in LAYER_TAPS and constants[b.split()[1]] == index]
             target = layers['default'][pos]['t']
             prefix = f"Hold {' or '.join(activators)} and press" if activators else f"On {name}, press"
             if binding == '&studio_unlock':
@@ -264,6 +291,15 @@ Tap then quickly hold a letter to repeat it.</p>
 <p><strong>Studio:</strong> __STUDIO__</p>
 <p><strong>Base layout:</strong> __SWITCHES__ QWERTY is selected at startup.
 The diagram selector only changes this reference; use the keyboard shortcuts to switch the actual keyboard.</p>
+<p><strong>Numbers:</strong> the top inner letter on either half holds the opposite numpad.
+Enter + Space locks/unlocks the right numpad. Tab + Space toggles Numword, which exits on
+Space, Enter, Tab or other non-number input. Numeric thumbs are plain keys; Backspace repeats.
+Esc / exit NUM sends Escape and leaves numeric modes, keeping your chosen base layout.
+Lock and Numword combos are scoped to exclude each other's mode.</p>
+<p><strong>Editing:</strong> hold Enter for right-hand arrows and plain left-hand modifiers.
+Word/line selection uses Linux/Windows application shortcuts; Clear term line sends Ctrl+E, Ctrl+U.
+The outer right thumb is sticky Shift (or normal Shift while held); quote is on that thumb under SYM.
+Tap Backspace then quickly hold it for repetition; a normal hold still activates MEDIA.</p>
 <p>This reference shows the firmware defaults. Changes saved in ZMK Studio are stored on the keyboard
 and are not reflected here. Use the SVG file for printing all layers.</p></aside>
 <script>
