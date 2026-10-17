@@ -1,263 +1,1014 @@
-layers:
-  default:
-  - Q
-  - W
-  - E
-  - R
-  - {t: T, h: numlft}
-  - {t: Y, h: numrht}
-  - U
-  - I
-  - O
-  - P
-  - {t: A, h: LCTL}
-  - {t: S, h: Gui}
-  - {t: D, h: Alt}
-  - {t: F, h: LSHIFT}
-  - G
-  - H
-  - {t: J, h: RSHIFT}
-  - {t: K, h: Alt}
-  - {t: L, h: Gui}
-  - {t: ;, h: RCTL}
-  - Z
-  - X
-  - C
-  - V
-  - B
-  - N
-  - M
-  - ','
-  - .
-  - /
-  - ⌦
-  - {t: ⏎, h: nav}
-  - {t: ↹, h: func}
-  - {t: ⌫, h: media}
-  - {t: ␣, h: sym}
-  - ''''
-  nav:
-  - Esc
-  - Page Up
-  - ↑
-  - Page Down
-  - {t: ▽, type: trans}
-  - '*'
-  - '7'
-  - '8'
-  - '9'
-  - '-'
-  - Home
-  - ←
-  - ↓
-  - →
-  - End
-  - /
-  - '4'
-  - '5'
-  - '6'
-  - +
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '='
-  - '1'
-  - '2'
-  - '3'
-  - '0'
-  - {t: ▽, type: trans}
-  - {type: held}
-  - ↹
-  - ⌫
-  - ␣
-  - .
-  sym:
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - ^
-  - '&'
-  - '*'
-  - _
-  - '='
-  - '-'
-  - '['
-  - '{'
-  - (
-  - <
-  - '>'
-  - )
-  - '}'
-  - ']'
-  - +
-  - Caps Lock
-  - '`'
-  - Tab Left
-  - Desk Left
-  - Caps Word
-  - {t: ▽, type: trans}
-  - Desk Right
-  - Tab Right
-  - {t: ▽, type: trans}
-  - \
-  - {t: ▽, type: trans}
-  - ⏎
-  - ⌦
-  - ⌫
-  - {type: held}
-  - {t: ▽, type: trans}
-  func:
-  - Boot
-  - Sft+ Page Up
-  - Sft+ ↑
-  - Sft+ Page Down
-  - {t: ▽, type: trans}
-  - PLAY PAUSE
-  - F7
-  - F8
-  - F9
-  - F10
-  - Sft+ Home
-  - Sft+ ←
-  - Sft+ ↓
-  - Sft+ →
-  - Sft+ End
-  - VOL UP
-  - F4
-  - F5
-  - F6
-  - F11
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - MUTE
-  - VOL DN
-  - F1
-  - F2
-  - F3
-  - F12
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {type: held}
-  - {t: ▽, type: trans}
-  - ␣
-  - {t: ▽, type: trans}
-  media:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - BT PRV
-  - BT NXT
-  - Reset
-  - Boot
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - BT CLR
-  - BT 1
-  - BT 2
-  - BT 3
-  - BT 4
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - EP TOG
-  - EP ON
-  - EP OFF
-  - Out USB
-  - Out BLE
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  numlft:
-  - Middle Click
-  - '7'
-  - '8'
-  - '9'
-  - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Left Click
-  - '4'
-  - '5'
-  - '6'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Right Click
-  - '1'
-  - '2'
-  - '3'
-  - '0'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  numrht:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {type: held}
-  - '7'
-  - '8'
-  - '9'
-  - '-'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '4'
-  - '5'
-  - '6'
-  - +
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '1'
-  - '2'
-  - '3'
-  - '0'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-combos:
-- p: [20, 21]
-  k: Ctl+ Z
+{
+  "layers": {
+    "default": [
+      {
+        "t": "Q"
+      },
+      {
+        "t": "W"
+      },
+      {
+        "t": "E"
+      },
+      {
+        "t": "R"
+      },
+      {
+        "t": "T",
+        "h": "NUMLFT"
+      },
+      {
+        "t": "Y",
+        "h": "NUMRHT"
+      },
+      {
+        "t": "U"
+      },
+      {
+        "t": "I"
+      },
+      {
+        "t": "O"
+      },
+      {
+        "t": "P"
+      },
+      {
+        "t": "A",
+        "h": "Ctrl"
+      },
+      {
+        "t": "S",
+        "h": "GUI"
+      },
+      {
+        "t": "D",
+        "h": "Alt"
+      },
+      {
+        "t": "F",
+        "h": "Shift"
+      },
+      {
+        "t": "G"
+      },
+      {
+        "t": "H"
+      },
+      {
+        "t": "J",
+        "h": "Shift"
+      },
+      {
+        "t": "K",
+        "h": "AltGr"
+      },
+      {
+        "t": "L",
+        "h": "GUI"
+      },
+      {
+        "t": ";",
+        "h": "Ctrl"
+      },
+      {
+        "t": "Z"
+      },
+      {
+        "t": "X"
+      },
+      {
+        "t": "C"
+      },
+      {
+        "t": "V"
+      },
+      {
+        "t": "B"
+      },
+      {
+        "t": "N"
+      },
+      {
+        "t": "M"
+      },
+      {
+        "t": ","
+      },
+      {
+        "t": "."
+      },
+      {
+        "t": "/"
+      },
+      {
+        "t": "Delete"
+      },
+      {
+        "t": "Enter",
+        "h": "NAV"
+      },
+      {
+        "t": "Tab",
+        "h": "FUNC"
+      },
+      {
+        "t": "Bksp",
+        "h": "MEDIA"
+      },
+      {
+        "t": "Space",
+        "h": "SYM"
+      },
+      {
+        "t": "'"
+      }
+    ],
+    "colemak": [
+      {
+        "t": "Q"
+      },
+      {
+        "t": "W"
+      },
+      {
+        "t": "F"
+      },
+      {
+        "t": "P"
+      },
+      {
+        "t": "B",
+        "h": "NUMLFT"
+      },
+      {
+        "t": "J",
+        "h": "NUMRHT"
+      },
+      {
+        "t": "L"
+      },
+      {
+        "t": "U"
+      },
+      {
+        "t": "Y"
+      },
+      {
+        "t": ";"
+      },
+      {
+        "t": "A",
+        "h": "Ctrl"
+      },
+      {
+        "t": "R",
+        "h": "GUI"
+      },
+      {
+        "t": "S",
+        "h": "Alt"
+      },
+      {
+        "t": "T",
+        "h": "Shift"
+      },
+      {
+        "t": "G"
+      },
+      {
+        "t": "M"
+      },
+      {
+        "t": "N",
+        "h": "Shift"
+      },
+      {
+        "t": "E",
+        "h": "AltGr"
+      },
+      {
+        "t": "I",
+        "h": "GUI"
+      },
+      {
+        "t": "O",
+        "h": "Ctrl"
+      },
+      {
+        "t": "Z"
+      },
+      {
+        "t": "X"
+      },
+      {
+        "t": "C"
+      },
+      {
+        "t": "D"
+      },
+      {
+        "t": "V"
+      },
+      {
+        "t": "K"
+      },
+      {
+        "t": "H"
+      },
+      {
+        "t": ","
+      },
+      {
+        "t": "."
+      },
+      {
+        "t": "/"
+      },
+      {
+        "t": "Delete"
+      },
+      {
+        "t": "Enter",
+        "h": "NAV"
+      },
+      {
+        "t": "Tab",
+        "h": "FUNC"
+      },
+      {
+        "t": "Bksp",
+        "h": "MEDIA"
+      },
+      {
+        "t": "Space",
+        "h": "SYM"
+      },
+      {
+        "t": "'"
+      }
+    ],
+    "nav": [
+      {
+        "t": "Esc"
+      },
+      {
+        "t": "PgUp"
+      },
+      {
+        "t": "↑"
+      },
+      {
+        "t": "PgDn"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "*"
+      },
+      {
+        "t": "7"
+      },
+      {
+        "t": "8"
+      },
+      {
+        "t": "9"
+      },
+      {
+        "t": "−"
+      },
+      {
+        "t": "Home"
+      },
+      {
+        "t": "←"
+      },
+      {
+        "t": "↓"
+      },
+      {
+        "t": "→"
+      },
+      {
+        "t": "End"
+      },
+      {
+        "t": "/"
+      },
+      {
+        "t": "4"
+      },
+      {
+        "t": "5"
+      },
+      {
+        "t": "6"
+      },
+      {
+        "t": "+"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "="
+      },
+      {
+        "t": "1"
+      },
+      {
+        "t": "2"
+      },
+      {
+        "t": "3"
+      },
+      {
+        "t": "0"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Tab"
+      },
+      {
+        "t": "Bksp"
+      },
+      {
+        "t": "Space"
+      },
+      {
+        "t": "."
+      }
+    ],
+    "sym": [
+      {
+        "t": "!"
+      },
+      {
+        "t": "@"
+      },
+      {
+        "t": "#"
+      },
+      {
+        "t": "$"
+      },
+      {
+        "t": "%"
+      },
+      {
+        "t": "^"
+      },
+      {
+        "t": "&"
+      },
+      {
+        "t": "*"
+      },
+      {
+        "t": "_"
+      },
+      {
+        "t": "="
+      },
+      {
+        "t": "−"
+      },
+      {
+        "t": "["
+      },
+      {
+        "t": "{"
+      },
+      {
+        "t": "("
+      },
+      {
+        "t": "<"
+      },
+      {
+        "t": ">"
+      },
+      {
+        "t": ")"
+      },
+      {
+        "t": "}"
+      },
+      {
+        "t": "]"
+      },
+      {
+        "t": "+"
+      },
+      {
+        "t": "Caps Lock"
+      },
+      {
+        "t": "`"
+      },
+      {
+        "t": "Ctrl+Shift+Tab"
+      },
+      {
+        "t": "Ctrl+GUI+←"
+      },
+      {
+        "t": "Caps Word"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Ctrl+GUI+→"
+      },
+      {
+        "t": "Ctrl+Tab"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "\\"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Enter"
+      },
+      {
+        "t": "Delete"
+      },
+      {
+        "t": "Bksp"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      }
+    ],
+    "func": [
+      {
+        "t": "Bootloader"
+      },
+      {
+        "t": "Shift+PgUp"
+      },
+      {
+        "t": "Shift+↑"
+      },
+      {
+        "t": "Shift+PgDn"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Play/Pause"
+      },
+      {
+        "t": "F7"
+      },
+      {
+        "t": "F8"
+      },
+      {
+        "t": "F9"
+      },
+      {
+        "t": "F10"
+      },
+      {
+        "t": "Shift+Home"
+      },
+      {
+        "t": "Shift+←"
+      },
+      {
+        "t": "Shift+↓"
+      },
+      {
+        "t": "Shift+→"
+      },
+      {
+        "t": "Shift+End"
+      },
+      {
+        "t": "Vol +"
+      },
+      {
+        "t": "F4"
+      },
+      {
+        "t": "F5"
+      },
+      {
+        "t": "F6"
+      },
+      {
+        "t": "F11"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Mute"
+      },
+      {
+        "t": "Vol −"
+      },
+      {
+        "t": "F1"
+      },
+      {
+        "t": "F2"
+      },
+      {
+        "t": "F3"
+      },
+      {
+        "t": "F12"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Space"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      }
+    ],
+    "media": [
+      {
+        "t": "Unlock Studio"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "BT prev"
+      },
+      {
+        "t": "BT next"
+      },
+      {
+        "t": "Reset"
+      },
+      {
+        "t": "Bootloader"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "BT clear"
+      },
+      {
+        "t": "BT 1"
+      },
+      {
+        "t": "BT 2"
+      },
+      {
+        "t": "BT 3"
+      },
+      {
+        "t": "BT 4"
+      },
+      {
+        "t": "Use Colemak-DH"
+      },
+      {
+        "t": "Use QWERTY"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Power toggle"
+      },
+      {
+        "t": "Power on"
+      },
+      {
+        "t": "Power off"
+      },
+      {
+        "t": "USB"
+      },
+      {
+        "t": "Bluetooth"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      }
+    ],
+    "numlft": [
+      {
+        "t": "Mid click"
+      },
+      {
+        "t": "7"
+      },
+      {
+        "t": "8"
+      },
+      {
+        "t": "9"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Left click"
+      },
+      {
+        "t": "4"
+      },
+      {
+        "t": "5"
+      },
+      {
+        "t": "6"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "Right click"
+      },
+      {
+        "t": "1"
+      },
+      {
+        "t": "2"
+      },
+      {
+        "t": "3"
+      },
+      {
+        "t": "0"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      }
+    ],
+    "numrht": [
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "7"
+      },
+      {
+        "t": "8"
+      },
+      {
+        "t": "9"
+      },
+      {
+        "t": "−"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "4"
+      },
+      {
+        "t": "5"
+      },
+      {
+        "t": "6"
+      },
+      {
+        "t": "+"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "1"
+      },
+      {
+        "t": "2"
+      },
+      {
+        "t": "3"
+      },
+      {
+        "t": "0"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      },
+      {
+        "t": "▽",
+        "type": "trans"
+      }
+    ]
+  },
+  "combos": [
+    {
+      "p": [
+        20,
+        21
+      ],
+      "k": "Ctrl+Z",
+      "l": [
+        "default",
+        "colemak"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
+name: Build firmware
 on: [push, pull_request, workflow_dispatch]
-
+permissions:
+  contents: read
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85
