@@ -56,5 +56,51 @@ class ReferenceChanges(unittest.TestCase):
         self.assertIn('Hold Bksp and press W', output['docs/layout.html'])
 
 
+class ColemakLayout(unittest.TestCase):
+    def setUp(self):
+        self.layers, self.raw, _ = renderer.parse()
+        self.names = list(self.layers)
+
+    def test_matrix_colemak_dh_letters(self):
+        expected = ['Q', 'W', 'F', 'P', 'B', 'J', 'L', 'U', 'Y', ';',
+                    'A', 'R', 'S', 'T', 'G', 'M', 'N', 'E', 'I', 'O',
+                    'Z', 'X', 'C', 'D', 'V', 'K', 'H', ',', '.', '/']
+        self.assertEqual([key['t'] for key in self.layers['colemak'][:30]], expected)
+
+    def test_modifier_and_layer_holds_stay_on_the_same_fingers(self):
+        for position in [4, 5, 10, 11, 12, 13, 16, 17, 18, 19]:
+            self.assertEqual(self.raw['default'][position].split()[:-1],
+                             self.raw['colemak'][position].split()[:-1])
+        self.assertEqual(self.raw['default'][30:], self.raw['colemak'][30:])
+
+    def test_shared_layers_override_both_bases_and_fall_through_correctly(self):
+        self.assertEqual(self.names[:2], ['default', 'colemak'])
+        self.assertLess(self.names.index('colemak'), min(self.names.index(name) for name in
+                        ['nav', 'sym', 'func', 'media', 'numlft', 'numrht']))
+
+        def resolve(position, active):
+            return next(self.raw[name][position] for name in reversed(self.names)
+                        if name in active and self.raw[name][position] != '&trans')
+
+        self.assertEqual(resolve(11, ['default', 'colemak', 'nav']), '&kp LEFT')
+        self.assertEqual(resolve(23, ['default', 'colemak', 'nav']), '&kp D')
+        self.assertEqual(resolve(23, ['default', 'nav']), '&kp V')
+
+    def test_media_can_select_both_bases(self):
+        self.assertEqual(self.raw['media'][20:22], ['&to COLEMAK', '&to DEFAULT'])
+        page = renderer.outputs()['docs/layout.html']
+        self.assertIn('Hold Bksp and press Z to select Colemak-DH.', page)
+        self.assertIn('Hold Bksp and press X to select QWERTY.', page)
+
+    def test_undo_applies_to_both_base_layouts(self):
+        output = json.loads(renderer.outputs()['keymap-drawer/bykeeb.yaml'])
+        self.assertEqual(output['combos'][0]['l'], ['default', 'colemak'])
+
+    def test_all_layers_are_visible_in_the_references(self):
+        output = renderer.outputs()
+        self.assertEqual(output['docs/layout.html'].count('<option '), len(self.names))
+        self.assertEqual(output['keymap-drawer/bykeeb.svg'].count('data-position='), len(self.names) * 36)
+
+
 if __name__ == '__main__':
     unittest.main()

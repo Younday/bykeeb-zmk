@@ -1,9 +1,9 @@
 # Bykeeb ZMK configuration
 
-36-key split QWERTY for two Seeed XIAO nRF52840 controllers, with upstream ZMK,
-USB Studio support and positional home-row modifiers.
+36-key split with switchable QWERTY and Colemak-DH for two Seeed XIAO nRF52840
+controllers, with upstream ZMK, Studio support and positional home-row modifiers.
 
-![All seven layers](keymap-drawer/bykeeb.svg)
+![Both base layouts and six shared layers](keymap-drawer/bykeeb.svg)
 
 Download and open [the interactive layer reference](docs/layout.html) in a browser,
 or zoom and print [the SVG](keymap-drawer/bykeeb.svg). Display geometry follows
@@ -32,17 +32,49 @@ It clears saved settings and Bluetooth bonds on whichever half receives it.
 
 ## Your layout
 
+QWERTY is selected at startup. To switch layouts, hold Backspace for about half a
+second to activate MEDIA, then tap:
+
+- **Z → Colemak-DH**
+- **X → QWERTY**
+
+Z and X have the same physical positions in both layouts. Switching takes effect
+immediately and lasts until the next switch or restart; it does not require
+reflashing. Keep your computer's input layout set to **US**: the keyboard sends
+the chosen letter layout itself.
+
+The Colemak-DH base uses the official
+[matrix/ergonomic layout](https://colemakmods.github.io/mod-dh/keyboards.html):
+
+```text
+Q W F P B    J L U Y ;
+A R S T G    M N E I O
+Z X C D V    K H , . /
+```
+
 Tap for the main legend; hold for the second action.
 Thumbs, left to right: Delete, Enter/NAV, Tab/FUNC, Backspace/MEDIA, Space/SYM, quote.
-T and Y access the left and right number layers respectively.
+The number-layer holds stay at the same physical positions: T/Y in QWERTY,
+B/J in Colemak-DH for the left/right number layers respectively.
 
-| A | S | D | F | J | K | L | ; |
-|---|---|---|---|---|---|---|---|
-| Ctrl | GUI | Alt | Shift | Shift | Right Alt/AltGr | GUI | Ctrl |
+Home-row modifiers also stay on the same fingers:
 
-Original letters, layer contents, shortcuts and mouse buttons are retained.
-On MEDIA, **Q now unlocks Studio**. Z + X Undo is restricted to the base layer
+| Layout | Left pinky | Left ring | Left middle | Left index | Right index | Right middle | Right ring | Right pinky |
+|---|---|---|---|---|---|---|---|---|
+| Hold | Ctrl | GUI | Alt | Shift | Shift | Right Alt/AltGr | GUI | Ctrl |
+| QWERTY tap | A | S | D | F | J | K | L | ; |
+| Colemak-DH tap | A | R | S | T | N | E | I | O |
+
+The six shared layers, mouse buttons and Backspace/MEDIA behavior are retained.
+On MEDIA, **Q unlocks Studio**. Z + X Undo works on both base layouts
 and requires 150 ms prior idle to reduce accidental activation during typing.
+Colemak-DH moves V to the old B position, so Ctrl+V moves with it.
+
+After flashing this update, if you have previously saved mappings in Studio,
+record any edits you want to keep and choose **Restore Stock Settings** in Studio
+to load the new eight-layer mapping. Inserting the Colemak base changes shared
+layer indices; an older saved mapping will not match these compiled defaults.
+This restores the keymap, without requiring settings-reset recovery firmware.
 
 ## Home-row modifier tuning
 
@@ -56,7 +88,7 @@ The `hml` and `hmr` behaviors use the upstream-supported
 - `require-prior-idle-ms = <150>` makes home-row presses during typing become letters.
 - `quick-tap-ms = <175>` supports tap-then-hold letter repetition.
 
-For Copy, hold right Ctrl (`;`) and tap C. After typing a word, pause briefly
+For Copy, hold right Ctrl (`;` in QWERTY, O in Colemak-DH) and tap C. After typing a word, pause briefly
 before starting a modifier chord. For a same-hand shortcut, first hold the modifier
 past 280 ms.
 
@@ -108,7 +140,9 @@ python3 scripts/render_keymap.py --check
 This generates the SVG, interactive HTML and JSON-compatible YAML directly from
 the firmware keymap using only Python's standard library. Layout CI rejects stale
 diagrams. Add parser/label support when introducing a new behavior.
-The renderer checks the seven 36-key layers; it does not replace a firmware build.
+The renderer checks each 36-key layer and its index; it does not replace a firmware build.
+Both bases precede the six shared layers so NAV, SYM and other layers override
+the selected base, with transparent keys falling through to that base.
 
 ## Firmware dependencies
 

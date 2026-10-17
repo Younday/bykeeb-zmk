@@ -12,12 +12,13 @@
 #include <dt-bindings/zmk/mouse.h>
 
 #define DEFAULT 0
-#define NAV     1
-#define SYM     2
-#define FUNC    3
-#define MEDIA   4
-#define NUMLFT  5
-#define NUMRHT  6
+#define COLEMAK 1
+#define NAV     2
+#define SYM     3
+#define FUNC    4
+#define MEDIA   5
+#define NUMLFT  6
+#define NUMRHT  7
 
 &caps_word {
     continue-list = <UNDERSCORE MINUS>;
@@ -29,7 +30,7 @@
         combo_undo {
             timeout-ms = <50>;
             require-prior-idle-ms = <150>;
-            layers = <DEFAULT>;
+            layers = <DEFAULT COLEMAK>;
             key-positions = <20 21>;
             bindings = <&kp LC(Z)>;
         };
@@ -78,6 +79,18 @@
             >;
         };
 
+        // Colemak-DH for matrix/columnar keyboards. Keep all holds at the same
+        // physical positions as QWERTY, including the number-layer access keys.
+        // Both bases must precede the shared layers so those can override them.
+        colemak_layer {
+            bindings = <
+    &kp Q        &kp W        &kp F       &kp P         &lt NUMLFT B                                &lt NUMRHT J  &kp L        &kp U         &kp Y       &kp SEMI
+    &hml LCTL A  &hml LGUI R  &hml LALT S &hml LSHIFT T &kp G                                       &kp M         &hmr RSHIFT N &hmr RALT E   &hmr RGUI I &hmr RCTL O
+    &kp Z        &kp X        &kp C       &kp D         &kp V                                       &kp K         &kp H        &kp COMMA     &kp DOT     &kp FSLH
+                                          &kp DEL       &lt NAV RET  &lt FUNC TAB  &lt MEDIA BSPC   &lt SYM SPACE &kp SQT
+            >;
+        };
+
         nav_layer {
             bindings = <
     &kp ESC      &kp PG_UP    &kp UP      &kp PG_DN     &trans                                      &kp ASTRK     &kp N7       &kp N8        &kp N9      &kp MINUS
@@ -109,7 +122,7 @@
             bindings = <
     &studio_unlock       &trans        &trans       &trans        &trans                                     &trans             &bt BT_PRV        &bt BT_NXT         &sys_reset     &bootloader
     &trans       &trans        &trans       &trans        &trans                                     &bt BT_CLR         &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2   &bt BT_SEL 3
-    &trans       &trans        &trans       &trans        &trans                                     &ext_power EP_TOG  &ext_power EP_ON  &ext_power EP_OFF  &out OUT_USB   &out OUT_BLE
+    &to COLEMAK  &to DEFAULT   &trans       &trans        &trans                                     &ext_power EP_TOG  &ext_power EP_ON  &ext_power EP_OFF  &out OUT_USB   &out OUT_BLE
                                             &trans        &trans        &trans        &trans         &trans             &trans
             >;
         };

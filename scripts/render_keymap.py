@@ -5,13 +5,15 @@ import html
 import json
 from pathlib import Path
 import re
+import textwrap
 
 ROOT = Path(__file__).resolve().parents[1]
 KEYMAP = ROOT / "boards/shields/bykeeb/bykeeb.keymap"
 LAYOUT = ROOT / "boards/shields/bykeeb/bykeeb-layouts.dtsi"
 ARITY = {"kp": 1, "hml": 2, "hmr": 2, "lt": 2, "trans": 0,
          "caps_word": 0, "bootloader": 0, "sys_reset": 0, "bt": 1,
-         "ext_power": 1, "out": 1, "mkp": 1, "studio_unlock": 0}
+         "ext_power": 1, "out": 1, "mkp": 1, "studio_unlock": 0, "to": 1}
+LAYER_LABELS = {"default": "QWERTY", "colemak": "Colemak-DH"}
 LABELS = {
     "LCTL": "Ctrl", "RCTL": "Ctrl", "LGUI": "GUI", "RGUI": "GUI",
     "LALT": "Alt", "RALT": "AltGr", "LSHIFT": "Shift", "RSHIFT": "Shift",
@@ -43,6 +45,10 @@ def label(code):
     return code
 
 
+def layer_label(name):
+    return LAYER_LABELS.get(name, name.upper())
+
+
 def parse():
     source = re.sub(r"/\*.*?\*/|//[^\n]*", "", KEYMAP.read_text(), flags=re.S)
     constants = {name: int(n) for name, n in re.findall(r"#define\s+(\w+)\s+(\d+)", source)}
@@ -65,6 +71,8 @@ def parse():
                 key = {"t": label(args[1]), "h": label(args[0])}
             elif behavior == "trans":
                 key = {"t": "▽", "type": "trans"}
+            elif behavior == "to":
+                key = {"t": "Use " + args[0]}
             elif behavior == "bt" and args[0] == "BT_SEL":
                 key = {"t": f"BT {int(args[1]) + 1}"}
             elif behavior in ("kp", "bt", "out", "mkp", "ext_power"):
@@ -75,8 +83,19 @@ def parse():
             keys.append(key)
         layers[name] = keys
         raw_layers[name] = raw
-    if len(layers) != 7 or list(layers)[0] != "default":
-        raise ValueError("Expected the seven Bykeeb layers, starting with default")
+    if not layers or list(layers)[0] != "default":
+        raise ValueError("Expected Bykeeb layers starting with default")
+    names = list(layers)
+    for index, name in enumerate(names):
+        if constants.get(name.upper()) != index:
+            raise ValueError(f"Layer index mismatch for {name}")
+    for name, bindings in raw_layers.items():
+        for index, binding in enumerate(bindings):
+            if binding.startswith('&to '):
+                target = binding.split()[1]
+                if target not in constants or constants[target] >= len(names):
+                    raise ValueError(f"Unknown layer {target}")
+                layers[name][index] = {"t": "Use " + layer_label(names[constants[target]])}
     positions = []
     for body in re.findall(r"<&key_physical_attrs\s+([^>]+)>", LAYOUT.read_text()):
         values = [int(n) for n in re.findall(r"-?\d+", body)]
@@ -141,21 +160,27 @@ def reference_metadata(layers, raw):
         f"quick tap {settings[node]['quick-tap-ms']} ms"
         for side, node in (("Left", "homerow_mod_left"), ("Right", "homerow_mod_right")))
     unlocks = []
+    switches = []
     for index, (name, bindings) in enumerate(raw.items()):
         for pos, binding in enumerate(bindings):
-            if binding != '&studio_unlock':
+            if binding != '&studio_unlock' and not binding.startswith('&to '):
                 continue
             activators = [layers['default'][p]['t'] for p, b in enumerate(raw['default'])
                           if b.startswith('&lt ') and constants[b.split()[1]] == index]
             target = layers['default'][pos]['t']
             prefix = f"Hold {' or '.join(activators)} and press" if activators else f"On {name}, press"
-            unlocks.append(f"{prefix} {target} to unlock editing.")
-    return combos, summaries, timing, ' '.join(unlocks) or 'No Studio unlock binding is defined.'
+            if binding == '&studio_unlock':
+                unlocks.append(f"{prefix} {target} to unlock editing.")
+            else:
+                selected = names[constants[binding.split()[1]]]
+                switches.append(f"{prefix} {target} to select {layer_label(selected)}.")
+    return (combos, summaries, timing,
+            ' '.join(unlocks) or 'No Studio unlock binding is defined.', ' '.join(switches))
 
 
 def draw_layer(name, keys, raw, positions, offset):
     out = [f'<g class="layer" data-layer="{name}" transform="translate(24 {offset})">',
-           f'<text class="layer-title" x="0" y="24">{name.upper()}</text>']
+           f'<text class="layer-title" x="0" y="24">{html.escape(layer_label(name))}</text>']
     for i, (key, binding, pos) in enumerate(zip(keys, raw, positions)):
         w, h, x, y, angle, rx, ry = pos
         x, y, w, h, rx, ry = [v * .64 for v in (x, y, w, h, rx, ry)]
@@ -200,17 +225,18 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 
 def outputs():
     layers, raw, positions = parse()
-    combos, summaries, timing, studio = reference_metadata(layers, raw)
+    combos, summaries, timing, studio, switches = reference_metadata(layers, raw)
     combo_text = '; '.join(summaries) or 'None'
     panels = [draw_layer(name, keys, raw[name], positions, 12 + i * 418)
               for i, (name, keys) in enumerate(layers.items())]
-    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="944" height="2980" '
-           'viewBox="0 0 944 2980" role="img" aria-label="Bykeeb seven-layer keymap">\n'
-           f'<style>{STYLE}</style>\n<rect width="944" height="2980" style="fill:#fafaf7;stroke:none"/>\n' + '\n'.join(panels) +
-           '<text x="24" y="2960" style="text-anchor:start">'
-           'Tap: main label · Hold: green label · ▽: underlying layer · Combos: ' + html.escape(combo_text) +
-           '</text>\n</svg>\n')
-    options = ''.join(f'<option value="{name}">{name.upper()}</option>' for name in layers)
+    footer = textwrap.wrap('Tap: main label · Hold: green label · ▽: underlying layer · Combos: ' + combo_text, 120)
+    height = len(layers) * 418 + 54 + (len(footer) - 1) * 18
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="944" height="{height}" '
+           f'viewBox="0 0 944 {height}" role="img" aria-label="Bykeeb {len(layers)}-layer keymap">\n'
+           f'<style>{STYLE}</style>\n<rect width="944" height="{height}" style="fill:#fafaf7;stroke:none"/>\n' + '\n'.join(panels) +
+           ''.join(f'<text x="24" y="{len(layers)*418+34+i*18}" style="text-anchor:start">{html.escape(line)}</text>\n'
+                   for i, line in enumerate(footer)) + '</svg>\n')
+    options = ''.join(f'<option value="{name}">{html.escape(layer_label(name))}</option>' for name in layers)
     single_svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 944 420" '
                   'role="img" aria-label="Selected keyboard layer">' +
                   f'<style>{STYLE}</style>' +
@@ -225,7 +251,7 @@ svg{width:100%;height:auto;margin-top:24px}.layer{display:none}.layer.active{dis
 aside{border-top:1px solid #bbc6c8;margin-top:20px;padding-top:18px}code{background:#eaf6ef;padding:2px 5px}
 @media print{select{display:none}.layer{display:block}svg{display:none}}
 </style>
-<h1>Bykeeb</h1><p>Seven layers, one keyboard. Choose a layer to explore its bindings.</p>
+<h1>Bykeeb</h1><p>__COUNT__ layers, one keyboard. Choose a layer to explore its bindings.</p>
 <label for="layer">Layer </label><select id="layer">OPTIONS</select>
 __LAYER_SVG__
 <p>Tap the main label; hold for the green label. ▽ falls through to an underlying active layer.
@@ -236,6 +262,8 @@ Tap then quickly hold a letter to repeat it.</p>
 <p><strong>Configured timings:</strong> __TIMING__.</p>
 <p><strong>Combos (base key labels):</strong> __COMBOS__.</p>
 <p><strong>Studio:</strong> __STUDIO__</p>
+<p><strong>Base layout:</strong> __SWITCHES__ QWERTY is selected at startup.
+The diagram selector only changes this reference; use the keyboard shortcuts to switch the actual keyboard.</p>
 <p>This reference shows the firmware defaults. Changes saved in ZMK Studio are stored on the keyboard
 and are not reflected here. Use the SVG file for printing all layers.</p></aside>
 <script>
@@ -245,7 +273,7 @@ selector.addEventListener('change',showLayer);showLayer();
 </script></html>
 '''.replace('OPTIONS', options).replace('__LAYER_SVG__', single_svg).replace(
         '__TIMING__', html.escape(timing)).replace('__COMBOS__', html.escape(combo_text)).replace(
-        '__STUDIO__', html.escape(studio))
+        '__STUDIO__', html.escape(studio)).replace('__SWITCHES__', html.escape(switches)).replace('__COUNT__', str(len(layers)))
     data = {"layers": layers, "combos": combos}
     return {"keymap-drawer/bykeeb.svg": svg,
             "keymap-drawer/bykeeb.yaml": json.dumps(data, ensure_ascii=False, indent=2) + '\n',
@@ -267,7 +295,7 @@ def main():
             target.write_text(content)
     if stale:
         parser.exit(1, 'Regenerate with python3 scripts/render_keymap.py: ' + ', '.join(stale) + '\n')
-    print('Layout references are current.' if args.check else 'Rendered seven 36-key layers.')
+    print('Layout references are current.' if args.check else f'Rendered {len(parse()[0])} 36-key layers.')
 
 
 if __name__ == '__main__':
