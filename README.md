@@ -84,7 +84,9 @@ Mouse modifier clicks require waiting for the hold threshold; eager modifiers
 
 Studio can assign built-in behaviors and the compiled `Home Row Left` and
 `Home Row Right` behaviors. USB Studio is enabled on the central/left half only.
-BLE Studio is not enabled; ordinary Bluetooth keyboard use is retained.
+The upstream defaults also enable BLE Studio on the central half. Use the native
+Studio app for BLE editing on Windows/macOS; Linux also supports BLE in the web
+app. Ordinary Bluetooth keyboard use is retained.
 
 Timings, new behaviors and combos require source edits and a rebuild.
 Studio mappings persist on the keyboard: after changing mappings in source and
@@ -125,4 +127,15 @@ support. The original 30-minute deep sleep remains in `config/bykeeb.conf`.
 
 Future upgrades should deliberately update the ZMK/Zephyr pins and matching
 workflow revision, then build both halves and check the layout references.
+
+## Related configurations reviewed
+
+- [Vianney's Bykeeb config](https://github.com/vianneyrenata/zmk-config-bykeeb)
+  demonstrates upstream pointing, dedicated thumb Shift and a recovery build.
+  Its active layout does not use its declared home-row mod behaviors. The recovery
+  image idea is retained here; its different layout and optional RGB are not copied.
+- [Fingerpunch's example](https://github.com/sadekbaroudi/zmk-config-fp-example)
+  and its migration guide explain controller renames, per-board filenames, pinned
+  upstream revisions and Cirque input processors. This Bykeeb defines no Cirque
+  or VIK device, so those extra hardware modules are not required.
 
