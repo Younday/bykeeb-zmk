@@ -2,26 +2,35 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: petejohanson
-      url-base: https://github.com/petejohanson
-    - name: sadekbaroudi
-      url-base: https://github.com/sadekbaroudi
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
+    # Upstream main snapshot, 2026-10-09. Upgrade these pins deliberately.
     - name: zmk
-      remote: petejohanson
-      revision: feat/pointers-move-scroll
+      remote: zmkfirmware
+      revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85
       import: app/west.yml
-    - name: chiptuner-zmk-module
-      remote: petejohanson
-      revision: main
-    # replace the one above with the commented one below when it gets merged into zmk
-    # must swap the zmk-fingerpunch-keyboards repo as well at the same time
-    # - name: zmk
-    #   remote: zmkfirmware
-    #   revision: main
-    #   import: app/west.yml
+    # Override ZMK's moving Zephyr branch with its resolved commit.
+    - name: zephyr
+      remote: zmkfirmware
+      revision: 10ba6d0cb38bc3d258775d27982f707599320085
+      clone-depth: 1
+      import:
+        name-blocklist:
+          - ci-tools
+          - hal_altera
+          - hal_cypress
+          - hal_infineon
+          - hal_microchip
+          - hal_nxp
+          - hal_openisa
+          - hal_xtensa
+          - hal_st
+          - hal_ti
+          - loramac-node
+          - mcuboot
+          - mcumgr
+          - net-tools
+          - openthread
+          - edtt
+          - trusted-firmware-m
   self:
     path: config
-    import: deps.yml

@@ -6,3 +6,5 @@ url: https://github.com/sadekbaroudi/bykeeb
 requires: [seeed_xiao]
 features:
   - keys
+  - studio
+

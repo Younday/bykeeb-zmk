@@ -1,0 +1,20 @@
+name: Check layout references
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check diagrams match the firmware keymap
+        run: python3 scripts/render_keymap.py --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: layout-reference
+          path: |
+            docs/layout.html
+            keymap-drawer/bykeeb.svg
