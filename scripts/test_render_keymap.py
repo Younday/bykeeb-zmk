@@ -71,6 +71,10 @@ class ReferenceChanges(unittest.TestCase):
         output = self.changed_outputs(r'(<&kp )LC\(E\)(>, <&kp LC\(U\)>)', r'\g<1>LC(A)\g<2>')
         self.assertIn('Clear Terminal Line: Ctrl+A then Ctrl+U', output['docs/layout.html'])
 
+    def test_macro_timing_in_reference_follows_source(self):
+        output = self.changed_outputs(r'(select_word: select_word\s*\{[\s\S]*?wait-ms\s*=\s*<)\d+', r'\g<1>60')
+        self.assertIn('tap 40 ms, wait 60 ms', output['docs/layout.html'])
+
 
 class ColemakLayout(unittest.TestCase):
     def setUp(self):
@@ -160,7 +164,10 @@ class ErgonomicLayers(unittest.TestCase):
         body = self.node('num_exit')
         bindings = re.search(r'bindings\s*=\s*(.*?);', body, re.S)[1]
         self.assertEqual(re.findall(r'<([^>]+)>', bindings),
-                         ['&kp ESC', '&num_off NUMLFT', '&num_off NUMRHT', '&num_off NUMWORD'])
+                         ['&macro_press', '&num_off NUMLFT', '&num_off NUMRHT',
+                          '&num_off NUMWORD', '&macro_tap', '&kp ESC'])
+        self.assertIn('wait-ms = <0>;', body)
+        self.assertIn('tap-ms = <40>;', body)
         self.assertIn('toggle-mode = "off";', self.node('num_off'))
         self.assertIn('locking;', self.node('num_off'))
         self.assertEqual(self.raw['numword'][0], '&num_exit')
@@ -202,6 +209,13 @@ class ErgonomicLayers(unittest.TestCase):
             self.assertEqual(re.findall(r'<&kp (\S+)>', self.node(node)), expected)
         self.assertEqual(self.raw['nav'][24], '&clear_line')
         self.assertEqual(self.raw['nav'][26:28], ['&select_word', '&select_line'])
+
+    def test_host_shortcut_macros_use_ble_safe_pacing(self):
+        # ZMK recommends >=30 ms wait and tap to avoid grouped/reordered BLE notifications.
+        for node in ['select_word', 'select_line', 'clear_line']:
+            for prop in ['wait-ms', 'tap-ms']:
+                value = int(re.search(rf'{prop}\s*=\s*<(\d+)>;', self.node(node))[1])
+                self.assertGreaterEqual(value, 30)
 
     def test_hrm_defaults_are_preserved(self):
         for node in ['hml', 'hmr']:

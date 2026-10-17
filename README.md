@@ -160,6 +160,10 @@ shortcuts. Terminal/Codex inputs often interpret these keys differently and do
 not provide GUI-style highlighting. **Clear current terminal input line** sends
 Ctrl+E, Ctrl+U for readline-style inputs (one logical line, not an entire
 multiline prompt); use it without other modifiers held. It sends no Enter.
+The host shortcut sequences use 40 ms taps and waits, following
+[ZMK's BLE pacing guidance](https://zmk.dev/docs/keymaps/behaviors/macros#keycode-sequences).
+Numeric Escape exits disable the layers immediately, then send a 40 ms Escape
+tap to clear Numword bookkeeping and notify the application.
 
 ## Sticky Shift and Backspace repetition
 

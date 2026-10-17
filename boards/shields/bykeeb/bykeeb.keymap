@@ -123,39 +123,42 @@
     };
 
     macros {
+        // Pace host shortcuts for BLE HID delivery (upstream recommends >=30 ms).
         select_word: select_word {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Select Word";
-            wait-ms = <5>;
-            tap-ms = <5>;
+            wait-ms = <40>;
+            tap-ms = <40>;
             bindings = <&kp LC(RIGHT)>, <&kp LC(LEFT)>, <&kp LC(LS(RIGHT))>;
         };
         select_line: select_line {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Select Line";
-            wait-ms = <5>;
-            tap-ms = <5>;
+            wait-ms = <40>;
+            tap-ms = <40>;
             bindings = <&kp HOME>, <&kp LS(END)>;
         };
         clear_line: clear_terminal_line {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Clear Terminal Line";
-            wait-ms = <5>;
-            tap-ms = <5>;
+            wait-ms = <40>;
+            tap-ms = <40>;
             bindings = <&kp LC(E)>, <&kp LC(U)>;
         };
         num_exit: exit_numbers {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Escape / Exit Numbers";
-            wait-ms = <5>;
-            tap-ms = <5>;
-            // Escape cancels auto-layer's internal state as well as reaching the host.
-            // Off-only toggles also clear manual locks, without touching either base.
-            bindings = <&kp ESC>, <&num_off NUMLFT>, <&num_off NUMRHT>, <&num_off NUMWORD>;
+            wait-ms = <0>;
+            tap-ms = <40>;
+            // Internal layer-off actions have no release work: apply them immediately.
+            // The following Escape clears auto-layer bookkeeping and reaches the host.
+            // Neither operation changes the selected base.
+            bindings = <&macro_press>, <&num_off NUMLFT>, <&num_off NUMRHT>,
+                       <&num_off NUMWORD>, <&macro_tap>, <&kp ESC>;
         };
     };
 
