@@ -55,15 +55,16 @@ Z X C D V    K H , . /
 
 Tap for the main legend; hold for the second action.
 Thumbs, left to right: Delete, Enter/NAV, Tab/FUNC, Backspace/MEDIA, Space/SYM,
-sticky Shift. Quote has moved to the rightmost thumb under SYM: hold Space and
-tap the Shift thumb. Hold Shift as well for a double quote.
+sticky Shift. Hold Space/SYM and tap **Z for quote**, or the **leftmost thumb
+(Delete position) for double quote**. Both are opposite the layer-holding thumb.
+Caps Lock has moved to MEDIA + the R / Colemak P position; Caps Word stays on SYM + G.
 
 The number-layer holds stay on the top inner letter of each half, but now operate
 the **opposite** hand: hold T (QWERTY) / B (Colemak-DH) for the right numpad;
 hold Y / J for the left numpad. These letter holds use positional roll protection,
 with the same 280/150/175 ms settings as the home-row mods. After fast typing,
-pause briefly before starting a number-layer hold. You can also use the thumb
-combos below, which do not require that prior-idle pause.
+pause briefly before starting a number-layer hold. The MEDIA shortcuts below
+also enter numeric modes without occupying a finger during number entry.
 
 Home-row modifiers also stay on the same fingers:
 
@@ -91,14 +92,17 @@ This restores the keymap, without requiring settings-reset recovery firmware.
 |---|---|---|
 | Brief right-hand number entry | Hold T / Colemak B | Right numpad, plain left modifiers |
 | Brief left-hand number entry | Hold Y / Colemak J | Left numpad, plain right modifiers and existing mouse buttons |
-| Lock/unlock right numpad | Chord **Enter + Space** | Release both thumbs and type numbers without holding a key |
-| Start/stop Numword | Chord **Tab + Space** | Right numpad that exits automatically |
+| Lock right numpad directly | Hold Backspace/MEDIA, tap **E / Colemak F**, release both | Type numbers without holding a key |
+| Lock after a right-numpad hold | Hold T / Colemak B, tap **W**, release both | The numpad stays on |
+| Unlock right numpad | Tap **W** on the locked numpad | Letters return, without sending an application key |
+| Start Numword | Hold Backspace/MEDIA, tap **W**, release both | Right numpad that exits automatically |
+| Stop Numword explicitly | Tap **W** on Numword | Letters return, without sending an application key |
 
-Press both thumb-combo keys within 50 ms. A combo consumes the underlying thumb
-actions. Enter+Space also locks the right numpad when it was activated by a letter
-hold. Press Enter+Space again to unlock it. Releasing the original letter hold
-does not undo the lock. While that original hold remains pressed, toggling the
-lock off also disables the layer; release and re-hold the letter to reactivate it.
+There are no numeric thumb combos: typing a newline followed by spaces, or a tab
+followed by a space, does not switch modes. The W key locks the right numpad when
+it was activated by a letter hold, then unlocks it on the next press. Releasing
+the original letter hold does not undo the lock. While that hold remains pressed,
+unlocking also disables the layer; release and re-hold the letter to reactivate it.
 
 The right numpad is:
 
@@ -116,16 +120,16 @@ Space, Enter, Tab or other non-continuation keys exit it **and still reach the
 application**. The left half remains available for letters; a right-hand letter
 at a numpad position still produces a number. For example, to type `12h` in
 Colemak, cancel Numword before H, or H's physical key will produce `1`.
-Tab+Space again cancels Numword without sending any application key.
+W cancels Numword without sending any application key. To type a literal W while
+in Numword, tap W to exit, then W again for the letter.
 
-Numeric modes are deliberately exclusive: the lock combo is disabled during
-Numword, and the Numword combo is disabled during a numeric hold or manual lock.
-Switch the current mode off before entering the other. The number layers expose
+Numeric mode entry lives on MEDIA, while numeric Backspace is a plain key, so
+exit the current mode before entering the other. The number layers expose
 **Esc / exit NUM** on the unused top pinky: Q position for right numpad/Numword,
 P position for left numpad. It sends Escape, cancels auto-mode and clears numeric
 locks without changing your selected base. Escape can also cancel an application
-operation (for instance, leave Vim insert mode); use the mode's thumb combo if
-you want to exit a lock or Numword without sending Escape.
+operation (for instance, leave Vim insert mode); use W to exit a right-hand lock
+or Numword without sending Escape.
 
 ## Navigation and editing
 
@@ -251,7 +255,7 @@ in those pinned manifests. Numword uses
 [`urob/zmk-auto-layer`](https://github.com/urob/zmk-auto-layer) pinned to
 `b50d514219c5ad61198f9a8be137c59d0674b11c`. Basic numeric locking, sticky Shift,
 hold-taps and editing macros use upstream ZMK behaviors. The auto-layer behavior
-is invoked by the compiled thumb combo; its properties are configured in source.
+is invoked by compiled bindings; its properties are configured in source.
 
 The old pointer fork, chiptuner and Fingerpunch dependencies are removed. This
 shield uses ordinary GPIO matrix scanning and upstream mouse buttons; no attached
@@ -269,12 +273,12 @@ has saved edits. Check both bases, then:
 
 1. Hold the top inner left letter, type right-hand digits, release: letters return.
    Repeat with the right hold and left digits. Check fast rolls of the base letters.
-2. Enter+Space: release both, type digits, Enter+Space again: letters return.
-   Also lock while the letter hold is down, then release it: digits must remain.
-3. Tab+Space: type `123.45`, Space, then letters: automatic exit. Repeat with
+2. MEDIA + E / Colemak F: release both, type digits, tap W: letters return.
+   Also lock with W while the letter hold is down, then release it: digits remain.
+3. MEDIA + W: type `123.45`, Space, then letters: automatic exit. Repeat with
    Enter and Tab. Check manual cancellation before a right-hand letter.
 4. Exit numeric modes with Escape and confirm Colemak stays selected. Check
-   mode exclusion; do not expect a disabled combo to switch between numeric modes.
+   numeric entry requires leaving the current mode first.
 5. Hold Enter, then plain Ctrl/Shift and right arrows; test word/line selection
    in an editor and clear-line in a disposable terminal input without executing it.
 6. Tap Shift then roll two letters: only the first should be capitalized. Hold

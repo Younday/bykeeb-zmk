@@ -121,8 +121,8 @@
         "h": "SYM"
       },
       {
-        "t": "Shift",
-        "h": "Sticky on tap"
+        "t": "Sticky Shift",
+        "h": "Shift"
       }
     ],
     "colemak": [
@@ -246,8 +246,8 @@
         "h": "SYM"
       },
       {
-        "t": "Shift",
-        "h": "Sticky on tap"
+        "t": "Sticky Shift",
+        "h": "Shift"
       }
     ],
     "nav": [
@@ -359,8 +359,8 @@
         "t": "Space"
       },
       {
-        "t": "Shift",
-        "h": "Sticky on tap"
+        "t": "Sticky Shift",
+        "h": "Shift"
       }
     ],
     "sym": [
@@ -425,7 +425,7 @@
         "t": "+"
       },
       {
-        "t": "Caps Lock"
+        "t": "'"
       },
       {
         "t": "`"
@@ -457,8 +457,7 @@
         "t": "\\"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "\""
       },
       {
         "t": "Enter"
@@ -474,7 +473,8 @@
         "type": "trans"
       },
       {
-        "t": "'"
+        "t": "Sticky Shift",
+        "h": "Shift"
       }
     ],
     "func": [
@@ -602,16 +602,13 @@
         "t": "Unlock Studio"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Auto Numword"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Lock NUM right"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Caps Lock"
       },
       {
         "t": "▽",
@@ -851,8 +848,7 @@
         "t": "Esc / exit NUM"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Lock NUM right"
       },
       {
         "t": "▽",
@@ -971,8 +967,7 @@
         "t": "Esc / exit NUM"
       },
       {
-        "t": "▽",
-        "type": "trans"
+        "t": "Auto Numword"
       },
       {
         "t": "▽",
@@ -1101,31 +1096,6 @@
       "l": [
         "default",
         "colemak"
-      ]
-    },
-    {
-      "p": [
-        31,
-        34
-      ],
-      "k": "Lock NUM right",
-      "l": [
-        "default",
-        "colemak",
-        "numlft",
-        "numrht"
-      ]
-    },
-    {
-      "p": [
-        32,
-        34
-      ],
-      "k": "Auto Numword",
-      "l": [
-        "default",
-        "colemak",
-        "numword"
       ]
     }
   ]

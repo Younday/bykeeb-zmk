@@ -60,8 +60,16 @@ class ReferenceChanges(unittest.TestCase):
         self.assertIn('Sticky Shift: timeout 1800 ms', output['docs/layout.html'])
 
     def test_studio_unlock_position(self):
-        output = self.changed_outputs(r'&studio_unlock\s+&trans', '&trans &studio_unlock')
+        output = self.changed_outputs(r'&studio_unlock\s+&num_word NUMWORD', '&num_word NUMWORD &studio_unlock')
         self.assertIn('Hold Bksp and press W', output['docs/layout.html'])
+
+    def test_numeric_entry_instructions_follow_bindings(self):
+        output = self.changed_outputs(r'&num_word NUMWORD\s+&tog NUMRHT', '&tog NUMRHT &num_word NUMWORD')
+        self.assertIn('Hold Bksp and press E / Colemak F: Auto Numword.', output['docs/layout.html'])
+
+    def test_macro_sequences_in_reference_follow_source(self):
+        output = self.changed_outputs(r'(<&kp )LC\(E\)(>, <&kp LC\(U\)>)', r'\g<1>LC(A)\g<2>')
+        self.assertIn('Clear Terminal Line: Ctrl+A then Ctrl+U', output['docs/layout.html'])
 
 
 class ColemakLayout(unittest.TestCase):
@@ -136,14 +144,16 @@ class ErgonomicLayers(unittest.TestCase):
         for position, key in [(7, 'UP'), (16, 'LEFT'), (17, 'DOWN'), (18, 'RIGHT')]:
             self.assertEqual(self.raw['nav'][position], '&kp ' + key)
 
-    def test_numeric_modes_are_exclusive_and_can_be_toggled_off(self):
+    def test_numeric_modes_have_direct_entry_lock_and_exit(self):
+        self.assertEqual(self.raw['media'][1:3], ['&num_word NUMWORD', '&tog NUMRHT'])
+        self.assertEqual(self.raw['numrht'][1], '&tog NUMRHT')
+        self.assertEqual(self.raw['numword'][1], '&num_word NUMWORD')
+        # Never turn newline + indentation into a mode-switching combo.
         combos = json.loads(renderer.outputs()['keymap-drawer/bykeeb.yaml'])['combos']
-        lock = next(combo for combo in combos if combo['p'] == [31, 34])
-        word = next(combo for combo in combos if combo['p'] == [32, 34])
-        self.assertEqual(lock['l'], ['default', 'colemak', 'numlft', 'numrht'])
-        self.assertEqual(word['l'], ['default', 'colemak', 'numword'])
-        self.assertNotIn('numword', lock['l'])
-        self.assertNotIn('numrht', word['l'])
+        self.assertTrue(all(not set(combo['p']) & set(range(30, 36)) for combo in combos))
+        # Numeric thumbs are plain, so MEDIA entry is unavailable until exit.
+        for name in ['numlft', 'numrht', 'numword']:
+            self.assertEqual(self.raw[name][33], '&kp BSPC')
         self.assertEqual(len(self.layers), 9)
 
     def test_exit_clears_auto_state_and_locks_without_changing_base(self):
@@ -168,7 +178,10 @@ class ErgonomicLayers(unittest.TestCase):
         for name in ['default', 'colemak']:
             self.assertEqual(self.raw[name][35], '&skq LSHIFT')
             self.assertEqual(self.raw[name][34], '&lt SYM SPACE')
-        self.assertEqual(self.raw['sym'][35], '&kp SQT')
+        self.assertEqual(self.raw['sym'][20], '&kp SQT')
+        self.assertEqual(self.raw['sym'][30], '&kp DQT')
+        self.assertEqual(self.raw['sym'][35], '&skq LSHIFT')
+        self.assertEqual(self.raw['media'][3], '&kp CAPS')
         self.assertIn('quick-release;', self.node('skq'))
         self.assertIn('ignore-modifiers;', self.node('skq'))
 

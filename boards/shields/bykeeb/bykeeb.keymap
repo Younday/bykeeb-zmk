@@ -40,20 +40,6 @@
             key-positions = <20 21>;
             bindings = <&kp LC(Z)>;
         };
-        // Opposite thumbs: short holds for a few digits, lock for long entry.
-        combo_num_lock {
-            timeout-ms = <50>;
-            layers = <DEFAULT COLEMAK NUMLFT NUMRHT>;
-            key-positions = <31 34>;
-            bindings = <&tog NUMRHT>;
-        };
-        // A separate layer keeps automatic and manually locked modes independent.
-        combo_num_word {
-            timeout-ms = <50>;
-            layers = <DEFAULT COLEMAK NUMWORD>;
-            key-positions = <32 34>;
-            bindings = <&num_word NUMWORD>;
-        };
     };
 };
 
@@ -210,8 +196,8 @@
             bindings = <
     &kp EXCL     &kp AT       &kp HASH        &kp DLLR         &kp PRCNT                                   &kp CARET     &kp AMPS          &kp ASTRK     &kp UNDER   &kp EQUAL
     &kp MINUS    &kp LBKT     &kp LBRC        &kp LPAR         &kp LT                                      &kp GT        &kp RPAR          &kp RBRC      &kp RBKT    &kp PLUS
-    &kp CAPS     &kp GRAVE    &kp LC(LS(TAB)) &kp LC(LG(LEFT)) &caps_word                                  &trans        &kp LC(LG(RIGHT)) &kp LC(TAB)   &trans      &kp BSLH
-                                              &trans           &kp RET       &kp DEL        &kp BSPC       &trans        &kp SQT
+    &kp SQT      &kp GRAVE    &kp LC(LS(TAB)) &kp LC(LG(LEFT)) &caps_word                                  &trans        &kp LC(LG(RIGHT)) &kp LC(TAB)   &trans      &kp BSLH
+                                              &kp DQT          &kp RET       &kp DEL        &kp BSPC       &trans        &skq LSHIFT
             >;
         };
 
@@ -226,7 +212,7 @@
 
         media_layer {
             bindings = <
-    &studio_unlock       &trans        &trans       &trans        &trans                                     &trans             &bt BT_PRV        &bt BT_NXT         &sys_reset     &bootloader
+    &studio_unlock       &num_word NUMWORD &tog NUMRHT &kp CAPS     &trans                                     &trans             &bt BT_PRV        &bt BT_NXT         &sys_reset     &bootloader
     &trans       &trans        &trans       &trans        &trans                                     &bt BT_CLR         &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2   &bt BT_SEL 3
     &to COLEMAK  &to DEFAULT   &trans       &trans        &trans                                     &ext_power EP_TOG  &ext_power EP_ON  &ext_power EP_OFF  &out OUT_USB   &out OUT_BLE
                                             &trans        &trans        &trans        &trans         &trans             &trans
@@ -244,7 +230,7 @@
 
         numrht_layer {
            bindings = <
-               &num_exit    &trans       &trans       &trans        &trans                                      &kp ASTRK   &kp N7       &kp N8        &kp N9      &kp MINUS
+               &num_exit    &tog NUMRHT  &trans       &trans        &trans                                      &kp ASTRK   &kp N7       &kp N8        &kp N9      &kp MINUS
                &kp LCTL     &kp LGUI     &kp LALT     &kp LSHIFT    &trans                                      &kp FSLH    &kp N4       &kp N5        &kp N6      &kp PLUS
                &trans       &trans       &trans       &trans        &trans                                      &kp EQUAL   &kp N1       &kp N2        &kp N3      &kp N0
                                                    &kp DEL       &kp RET       &kp TAB        &kp BSPC       &kp SPACE   &kp DOT
@@ -254,7 +240,7 @@
         // Separate from NUMRHT so manual locking never inherits auto-exit state.
         numword_layer {
             bindings = <
-    &num_exit    &trans       &trans      &trans        &trans                                      &kp ASTRK   &kp N7       &kp N8        &kp N9      &kp MINUS
+    &num_exit    &num_word NUMWORD &trans  &trans        &trans                                      &kp ASTRK   &kp N7       &kp N8        &kp N9      &kp MINUS
     &trans       &trans       &trans      &trans        &trans                                      &kp FSLH    &kp N4       &kp N5        &kp N6      &kp PLUS
     &trans       &trans       &trans      &trans        &trans                                      &kp EQUAL   &kp N1       &kp N2        &kp N3      &kp N0
                                            &kp DEL       &kp RET       &kp TAB        &kp BSPC       &kp SPACE   &kp DOT

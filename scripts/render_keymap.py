@@ -28,7 +28,7 @@ HOLD_NODES = {"homerow_mod_left": "Left", "homerow_mod_right": "Right",
 LABELS = {
     "LCTL": "Ctrl", "RCTL": "Ctrl", "LGUI": "GUI", "RGUI": "GUI",
     "LALT": "Alt", "RALT": "AltGr", "LSHIFT": "Shift", "RSHIFT": "Shift",
-    "SEMI": ";", "COMMA": ",", "DOT": ".", "FSLH": "/", "SQT": "'",
+    "SEMI": ";", "COMMA": ",", "DOT": ".", "FSLH": "/", "SQT": "'", "DQT": '"',
     "DEL": "Delete", "RET": "Enter", "TAB": "Tab", "BSPC": "Bksp",
     "SPACE": "Space", "ESC": "Esc", "PG_UP": "PgUp", "PG_DN": "PgDn",
     "HOME": "Home", "END": "End", "UP": "↑", "DOWN": "↓", "LEFT": "←",
@@ -80,7 +80,7 @@ def binding_key(binding, constants, names):
     if behavior == "trans":
         return {"t": "▽", "type": "trans"}
     if behavior == "skq":
-        return {"t": label(args[0]), "h": "Sticky on tap"}
+        return {"t": "Sticky " + label(args[0]), "h": label(args[0])}
     if behavior == "bt" and args[0] == "BT_SEL":
         return {"t": f"BT {int(args[1]) + 1}"}
     if behavior in ("kp", "bt", "out", "mkp", "ext_power"):
@@ -239,6 +239,42 @@ def draw_layer(name, keys, raw, positions, offset):
     return '\n'.join(out)
 
 
+def numeric_actions(layers, raw):
+    """Derive entry/exit key locations rather than freezing them in generated prose."""
+    descriptions = []
+    for name, bindings in raw.items():
+        for pos, binding in enumerate(bindings):
+            if binding.split()[0] not in ('&tog', '&num_word'):
+                continue
+            key = layers['default'][pos]['t']
+            if layers['colemak'][pos]['t'] != key:
+                key += ' / Colemak ' + layers['colemak'][pos]['t']
+            action = layers[name][pos]['t']
+            if name == 'media':
+                activators = [layers['default'][p]['t'] for p, b in enumerate(raw['default'])
+                              if b.startswith('&bsp MEDIA ')]
+                prefix = 'Hold ' + ' or '.join(activators) + ' and press'
+            else:
+                prefix = f'On {layer_label(name)}, press'
+            descriptions.append(f'{prefix} {key}: {action}.')
+    return ' '.join(descriptions)
+
+
+def macro_actions(layers):
+    source = re.sub(r"/\*.*?\*/|//[^\n]*", "", KEYMAP.read_text(), flags=re.S)
+    constants = {name: int(n) for name, n in re.findall(r"#define\s+(\w+)\s+(\d+)", source)}
+    actions = []
+    for _, body in re.findall(r"(\w+)\s*\{([^{}]*)\};", source, re.S):
+        if 'compatible = "zmk,behavior-macro"' not in body:
+            continue
+        name = re.search(r'display-name\s*=\s*"([^"]+)";', body)[1]
+        bindings = re.search(r'bindings\s*=\s*(.*?);', body, re.S)[1]
+        sequence = [binding_key(b, constants, list(layers))['t']
+                    for b in re.findall(r'<(&[^>]+)>', bindings)]
+        actions.append(name + ': ' + ' then '.join(sequence))
+    return '; '.join(actions)
+
+
 STYLE = """
 svg {font:12px system-ui,sans-serif;background:#fafaf7;color:#182b34}
 rect {fill:white;stroke:#bbc6c8;stroke-width:1.2}
@@ -292,14 +328,15 @@ Tap then quickly hold a letter to repeat it.</p>
 <p><strong>Base layout:</strong> __SWITCHES__ QWERTY is selected at startup.
 The diagram selector only changes this reference; use the keyboard shortcuts to switch the actual keyboard.</p>
 <p><strong>Numbers:</strong> the top inner letter on either half holds the opposite numpad.
-Enter + Space locks/unlocks the right numpad. Tab + Space toggles Numword, which exits on
-Space, Enter, Tab or other non-number input. Numeric thumbs are plain keys; Backspace repeats.
-Esc / exit NUM sends Escape and leaves numeric modes, keeping your chosen base layout.
-Lock and Numword combos are scoped to exclude each other's mode.</p>
+__NUMERIC_ACTIONS__ Numword exits on Space, Enter, Tab or other non-continuation input.
+Numeric thumbs are plain keys; Backspace repeats. Esc / exit NUM sends Escape and leaves
+numeric modes, keeping your chosen base layout. Exit one numeric mode before entering the other.</p>
 <p><strong>Editing:</strong> hold Enter for right-hand arrows and plain left-hand modifiers.
-Word/line selection uses Linux/Windows application shortcuts; Clear term line sends Ctrl+E, Ctrl+U.
-The outer right thumb is sticky Shift (or normal Shift while held); quote is on that thumb under SYM.
+Word/line selection uses Linux/Windows application shortcuts; macro sequences are listed below.
+The outer right thumb is sticky Shift (or normal Shift while held).
+Under SYM, quote is on Z and double quote on the leftmost thumb, opposite the Space/SYM hold.
 Tap Backspace then quickly hold it for repetition; a normal hold still activates MEDIA.</p>
+<p><strong>Macro actions:</strong> __MACROS__.</p>
 <p>This reference shows the firmware defaults. Changes saved in ZMK Studio are stored on the keyboard
 and are not reflected here. Use the SVG file for printing all layers.</p></aside>
 <script>
@@ -309,7 +346,9 @@ selector.addEventListener('change',showLayer);showLayer();
 </script></html>
 '''.replace('OPTIONS', options).replace('__LAYER_SVG__', single_svg).replace(
         '__TIMING__', html.escape(timing)).replace('__COMBOS__', html.escape(combo_text)).replace(
-        '__STUDIO__', html.escape(studio)).replace('__SWITCHES__', html.escape(switches)).replace('__COUNT__', str(len(layers)))
+        '__STUDIO__', html.escape(studio)).replace('__SWITCHES__', html.escape(switches)).replace(
+        '__NUMERIC_ACTIONS__', html.escape(numeric_actions(layers, raw))).replace(
+        '__MACROS__', html.escape(macro_actions(layers))).replace('__COUNT__', str(len(layers)))
     data = {"layers": layers, "combos": combos}
     return {"keymap-drawer/bykeeb.svg": svg,
             "keymap-drawer/bykeeb.yaml": json.dumps(data, ensure_ascii=False, indent=2) + '\n',
