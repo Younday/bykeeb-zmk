@@ -193,7 +193,8 @@ class ErgonomicLayers(unittest.TestCase):
         self.assertIn('ignore-modifiers;', self.node('skq'))
 
     def test_backspace_repeat_is_local_to_backspace_and_preserves_system_access(self):
-        self.assertIn('quick-tap-ms = <200>;', self.node('bsp'))
+        self.assertIn('quick-tap-ms = <400>;', self.node('bsp'))
+        self.assertIn('tapping-term-ms = <200>;', self.node('bsp'))
         self.assertIn('bindings = <&mo>, <&kp>;', self.node('bsp'))
         for name in ['default', 'colemak']:
             self.assertEqual(self.raw[name][33], '&bsp MEDIA BSPC')

@@ -51,7 +51,8 @@
             display-name = "Backspace / Media";
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
+            // ZMK measures from first press to second press, including the first tap.
+            quick-tap-ms = <400>;
             bindings = <&mo>, <&kp>;
         };
         skq: sticky_shift {

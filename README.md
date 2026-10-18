@@ -174,9 +174,11 @@ a following rolled key. Existing Shift HRMs remain for multi-modifier shortcuts.
 Caps Word is still **Space/SYM + G** for identifiers such as `MY_CONSTANT`.
 
 Backspace still holds MEDIA after 200 ms. To repeat deletion, **tap Backspace,
-then quickly press and hold it again**, starting the second press within 200 ms
+then press and hold it again**, starting the second press within 400 ms
 of the first press. During that window the second press cannot activate MEDIA;
-pause before entering MEDIA immediately after a deletion. This repeat setting
+pause at least 400 ms from the last Backspace press before entering MEDIA after
+a deletion. Keep the second press held until your computer's normal key-repeat
+delay has passed. This repeat setting
 is local to Backspace, not applied to Enter, Tab or Space. NAV, SYM and numeric
 layers also provide a plain repeating Backspace.
 
