@@ -2,12 +2,18 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     # Upstream main snapshot, 2026-10-09. Upgrade these pins deliberately.
     - name: zmk
       remote: zmkfirmware
       revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85
       import: app/west.yml
+    # Numword auto-exit, compatible with the pinned upstream layer-lock API.
+    - name: zmk-auto-layer
+      remote: urob
+      revision: b50d514219c5ad61198f9a8be137c59d0674b11c
     # Override ZMK's moving Zephyr branch with its resolved commit.
     - name: zephyr
       remote: zmkfirmware

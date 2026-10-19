@@ -8,8 +8,8 @@ svg{width:100%;height:auto;margin-top:24px}.layer{display:none}.layer.active{dis
 aside{border-top:1px solid #bbc6c8;margin-top:20px;padding-top:18px}code{background:#eaf6ef;padding:2px 5px}
 @media print{select{display:none}.layer{display:block}svg{display:none}}
 </style>
-<h1>Bykeeb</h1><p>8 layers, one keyboard. Choose a layer to explore its bindings.</p>
-<label for="layer">Layer </label><select id="layer"><option value="default">QWERTY</option><option value="colemak">Colemak-DH</option><option value="nav">NAV</option><option value="sym">SYM</option><option value="func">FUNC</option><option value="media">MEDIA</option><option value="numlft">NUMLFT</option><option value="numrht">NUMRHT</option></select>
+<h1>Bykeeb</h1><p>9 layers, one keyboard. Choose a layer to explore its bindings.</p>
+<label for="layer">Layer </label><select id="layer"><option value="default">QWERTY</option><option value="colemak">Colemak-DH</option><option value="nav">NAV</option><option value="sym">SYM</option><option value="func">FUNC</option><option value="media">MEDIA</option><option value="numlft">NUM left</option><option value="numrht">NUM right</option><option value="numword">Numword</option></select>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 944 420" role="img" aria-label="Selected keyboard layer"><style>
 svg {font:12px system-ui,sans-serif;background:#fafaf7;color:#182b34}
 rect {fill:white;stroke:#bbc6c8;stroke-width:1.2}
@@ -41,16 +41,16 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="224.0" y="104.32">R</text>
 </g>
 <g class="key dual" data-position="4" transform="rotate(0.0 288.0 112.0)">
-<title>&amp;lt NUMLFT T</title>
+<title>&amp;nml NUMRHT T</title>
 <rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="288.0" y="109.0">T</text>
-<text class="hold" x="288.0" y="134.0">NUMLFT</text>
+<text class="hold" x="288.0" y="134.0">NUM right</text>
 </g>
 <g class="key dual" data-position="5" transform="rotate(0.0 608.0 112.0)">
-<title>&amp;lt NUMRHT Y</title>
+<title>&amp;nmr NUMLFT Y</title>
 <rect x="578.0" y="82.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="608.0" y="109.0">Y</text>
-<text class="hold" x="608.0" y="134.0">NUMRHT</text>
+<text class="hold" x="608.0" y="134.0">NUM left</text>
 </g>
 <g class="key" data-position="6" transform="rotate(0.0 672.0 104.32)">
 <title>&amp;kp U</title>
@@ -198,21 +198,23 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text class="hold" x="384.0" y="365.04">FUNC</text>
 </g>
 <g class="key dual" data-position="33" transform="rotate(0.0 512.0 343.04)">
-<title>&amp;lt MEDIA BSPC</title>
+<title>&amp;bsp MEDIA BSPC</title>
 <rect x="482.0" y="313.04" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="512.0" y="340.04">Bksp</text>
 <text class="hold" x="512.0" y="365.04">MEDIA</text>
 </g>
 <g class="key dual" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;lt SYM SPACE</title>
+<title>&amp;spc SYM SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="313.8">Space</text>
 <text class="hold" x="576.0" y="338.8">SYM</text>
 </g>
-<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;kp SQT</title>
+<g class="key dual" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;skq LSHIFT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">&#x27;</text>
+<text style="font-size:12.00px" x="640.0" y="294.0">Sticky</text>
+<text style="font-size:12.00px" x="640.0" y="308.0">Shift</text>
+<text class="hold" x="640.0" y="326.0">Shift</text>
 </g>
 </g><g class="layer" data-layer="colemak" transform="translate(24 0)">
 <text class="layer-title" x="0" y="24">Colemak-DH</text>
@@ -237,16 +239,16 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="224.0" y="104.32">P</text>
 </g>
 <g class="key dual" data-position="4" transform="rotate(0.0 288.0 112.0)">
-<title>&amp;lt NUMLFT B</title>
+<title>&amp;nml NUMRHT B</title>
 <rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="288.0" y="109.0">B</text>
-<text class="hold" x="288.0" y="134.0">NUMLFT</text>
+<text class="hold" x="288.0" y="134.0">NUM right</text>
 </g>
 <g class="key dual" data-position="5" transform="rotate(0.0 608.0 112.0)">
-<title>&amp;lt NUMRHT J</title>
+<title>&amp;nmr NUMLFT J</title>
 <rect x="578.0" y="82.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="608.0" y="109.0">J</text>
-<text class="hold" x="608.0" y="134.0">NUMRHT</text>
+<text class="hold" x="608.0" y="134.0">NUM left</text>
 </g>
 <g class="key" data-position="6" transform="rotate(0.0 672.0 104.32)">
 <title>&amp;kp L</title>
@@ -394,21 +396,23 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text class="hold" x="384.0" y="365.04">FUNC</text>
 </g>
 <g class="key dual" data-position="33" transform="rotate(0.0 512.0 343.04)">
-<title>&amp;lt MEDIA BSPC</title>
+<title>&amp;bsp MEDIA BSPC</title>
 <rect x="482.0" y="313.04" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="512.0" y="340.04">Bksp</text>
 <text class="hold" x="512.0" y="365.04">MEDIA</text>
 </g>
 <g class="key dual" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;lt SYM SPACE</title>
+<title>&amp;spc SYM SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="313.8">Space</text>
 <text class="hold" x="576.0" y="338.8">SYM</text>
 </g>
-<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;kp SQT</title>
+<g class="key dual" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;skq LSHIFT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">&#x27;</text>
+<text style="font-size:12.00px" x="640.0" y="294.0">Sticky</text>
+<text style="font-size:12.00px" x="640.0" y="308.0">Shift</text>
+<text class="hold" x="640.0" y="326.0">Shift</text>
 </g>
 </g><g class="layer" data-layer="nav" transform="translate(24 0)">
 <text class="layer-title" x="0" y="24">NAV</text>
@@ -418,149 +422,155 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="32.0" y="144.0">Esc</text>
 </g>
 <g class="key" data-position="1" transform="rotate(0.0 96.0 96.0)">
-<title>&amp;kp PG_UP</title>
+<title>&amp;kp LC(Z)</title>
 <rect x="66.0" y="66.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="96.0">PgUp</text>
+<text style="font-size:12.00px" x="96.0" y="96.0">Ctrl+Z</text>
 </g>
 <g class="key" data-position="2" transform="rotate(0.0 160.0 80.0)">
-<title>&amp;kp UP</title>
+<title>&amp;kp LC(X)</title>
 <rect x="130.0" y="50.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="160.0" y="80.0">↑</text>
+<text style="font-size:12.00px" x="160.0" y="80.0">Ctrl+X</text>
 </g>
 <g class="key" data-position="3" transform="rotate(0.0 224.0 104.32)">
-<title>&amp;kp PG_DN</title>
+<title>&amp;kp LC(C)</title>
 <rect x="194.0" y="74.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="224.0" y="104.32">PgDn</text>
+<text style="font-size:12.00px" x="224.0" y="104.32">Ctrl+C</text>
 </g>
-<g class="key transparent" data-position="4" transform="rotate(0.0 288.0 112.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="4" transform="rotate(0.0 288.0 112.0)">
+<title>&amp;kp LC(V)</title>
 <rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="288.0" y="112.0">▽</text>
+<text style="font-size:12.00px" x="288.0" y="112.0">Ctrl+V</text>
 </g>
 <g class="key" data-position="5" transform="rotate(0.0 608.0 112.0)">
-<title>&amp;kp ASTRK</title>
+<title>&amp;kp PG_UP</title>
 <rect x="578.0" y="82.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="112.0">*</text>
+<text style="font-size:12.00px" x="608.0" y="112.0">PgUp</text>
 </g>
 <g class="key" data-position="6" transform="rotate(0.0 672.0 104.32)">
-<title>&amp;kp N7</title>
+<title>&amp;kp HOME</title>
 <rect x="642.0" y="74.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="672.0" y="104.32">7</text>
+<text style="font-size:12.00px" x="672.0" y="104.32">Home</text>
 </g>
 <g class="key" data-position="7" transform="rotate(0.0 736.0 80.0)">
-<title>&amp;kp N8</title>
+<title>&amp;kp UP</title>
 <rect x="706.0" y="50.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="736.0" y="80.0">8</text>
+<text style="font-size:12.00px" x="736.0" y="80.0">↑</text>
 </g>
 <g class="key" data-position="8" transform="rotate(0.0 800.0 96.0)">
-<title>&amp;kp N9</title>
+<title>&amp;kp END</title>
 <rect x="770.0" y="66.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="800.0" y="96.0">9</text>
+<text style="font-size:12.00px" x="800.0" y="96.0">End</text>
 </g>
 <g class="key" data-position="9" transform="rotate(0.0 864.0 144.0)">
-<title>&amp;kp MINUS</title>
+<title>&amp;kp LC(DEL)</title>
 <rect x="834.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="864.0" y="144.0">−</text>
+<text style="font-size:12.00px" x="864.0" y="137.0">Ctrl+</text>
+<text style="font-size:12.00px" x="864.0" y="151.0">Delete</text>
 </g>
 <g class="key" data-position="10" transform="rotate(0.0 32.0 208.0)">
-<title>&amp;kp HOME</title>
+<title>&amp;kp LCTL</title>
 <rect x="2.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="32.0" y="208.0">Home</text>
+<text style="font-size:12.00px" x="32.0" y="208.0">Ctrl</text>
 </g>
 <g class="key" data-position="11" transform="rotate(0.0 96.0 160.0)">
-<title>&amp;kp LEFT</title>
+<title>&amp;kp LGUI</title>
 <rect x="66.0" y="130.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="160.0">←</text>
+<text style="font-size:12.00px" x="96.0" y="160.0">GUI</text>
 </g>
 <g class="key" data-position="12" transform="rotate(0.0 160.0 144.0)">
-<title>&amp;kp DOWN</title>
+<title>&amp;kp LALT</title>
 <rect x="130.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="160.0" y="144.0">↓</text>
+<text style="font-size:12.00px" x="160.0" y="144.0">Alt</text>
 </g>
 <g class="key" data-position="13" transform="rotate(0.0 224.0 168.32)">
-<title>&amp;kp RIGHT</title>
+<title>&amp;kp LSHIFT</title>
 <rect x="194.0" y="138.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="224.0" y="168.32">→</text>
+<text style="font-size:12.00px" x="224.0" y="168.32">Shift</text>
 </g>
 <g class="key" data-position="14" transform="rotate(0.0 288.0 176.0)">
-<title>&amp;kp END</title>
+<title>&amp;kp LC(BSPC)</title>
 <rect x="258.0" y="146.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="288.0" y="176.0">End</text>
+<text style="font-size:9.63px" x="288.0" y="176.0">Ctrl+Bksp</text>
 </g>
 <g class="key" data-position="15" transform="rotate(0.0 608.0 176.0)">
-<title>&amp;kp FSLH</title>
+<title>&amp;kp PG_DN</title>
 <rect x="578.0" y="146.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="176.0">/</text>
+<text style="font-size:12.00px" x="608.0" y="176.0">PgDn</text>
 </g>
 <g class="key" data-position="16" transform="rotate(0.0 672.0 168.32)">
-<title>&amp;kp N4</title>
+<title>&amp;kp LEFT</title>
 <rect x="642.0" y="138.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="672.0" y="168.32">4</text>
+<text style="font-size:12.00px" x="672.0" y="168.32">←</text>
 </g>
 <g class="key" data-position="17" transform="rotate(0.0 736.0 144.0)">
-<title>&amp;kp N5</title>
+<title>&amp;kp DOWN</title>
 <rect x="706.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="736.0" y="144.0">5</text>
+<text style="font-size:12.00px" x="736.0" y="144.0">↓</text>
 </g>
 <g class="key" data-position="18" transform="rotate(0.0 800.0 160.0)">
-<title>&amp;kp N6</title>
+<title>&amp;kp RIGHT</title>
 <rect x="770.0" y="130.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="800.0" y="160.0">6</text>
+<text style="font-size:12.00px" x="800.0" y="160.0">→</text>
 </g>
 <g class="key" data-position="19" transform="rotate(0.0 864.0 208.0)">
-<title>&amp;kp PLUS</title>
+<title>&amp;kp DEL</title>
 <rect x="834.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="864.0" y="208.0">+</text>
+<text style="font-size:12.00px" x="864.0" y="208.0">Delete</text>
 </g>
-<g class="key transparent" data-position="20" transform="rotate(0.0 32.0 272.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="20" transform="rotate(0.0 32.0 272.0)">
+<title>&amp;kp LC(LEFT)</title>
 <rect x="2.0" y="242.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="32.0" y="272.0">▽</text>
+<text style="font-size:12.00px" x="32.0" y="272.0">Ctrl+←</text>
 </g>
-<g class="key transparent" data-position="21" transform="rotate(0.0 96.0 224.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="21" transform="rotate(0.0 96.0 224.0)">
+<title>&amp;kp LC(RIGHT)</title>
 <rect x="66.0" y="194.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="224.0">▽</text>
+<text style="font-size:12.00px" x="96.0" y="224.0">Ctrl+→</text>
 </g>
-<g class="key transparent" data-position="22" transform="rotate(0.0 160.0 208.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="22" transform="rotate(0.0 160.0 208.0)">
+<title>&amp;kp LC(LS(LEFT))</title>
 <rect x="130.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="160.0" y="208.0">▽</text>
+<text style="font-size:12.00px" x="160.0" y="201.0">Ctrl+</text>
+<text style="font-size:12.00px" x="160.0" y="215.0">Shift+←</text>
 </g>
-<g class="key transparent" data-position="23" transform="rotate(0.0 224.0 232.32)">
-<title>&amp;trans</title>
+<g class="key" data-position="23" transform="rotate(0.0 224.0 232.32)">
+<title>&amp;kp LC(LS(RIGHT))</title>
 <rect x="194.0" y="202.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="224.0" y="232.32">▽</text>
+<text style="font-size:12.00px" x="224.0" y="225.32">Ctrl+</text>
+<text style="font-size:12.00px" x="224.0" y="239.32">Shift+→</text>
 </g>
-<g class="key transparent" data-position="24" transform="rotate(0.0 288.0 240.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="24" transform="rotate(0.0 288.0 240.0)">
+<title>&amp;clear_line</title>
 <rect x="258.0" y="210.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="288.0" y="240.0">▽</text>
+<text style="font-size:12.00px" x="288.0" y="233.0">Clear</text>
+<text style="font-size:9.63px" x="288.0" y="247.0">term line</text>
 </g>
 <g class="key" data-position="25" transform="rotate(0.0 608.0 240.0)">
-<title>&amp;kp EQUAL</title>
+<title>&amp;kp LC(HOME)</title>
 <rect x="578.0" y="210.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="240.0">=</text>
+<text style="font-size:9.63px" x="608.0" y="240.0">Ctrl+Home</text>
 </g>
 <g class="key" data-position="26" transform="rotate(0.0 672.0 232.32)">
-<title>&amp;kp N1</title>
+<title>&amp;select_word</title>
 <rect x="642.0" y="202.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="672.0" y="232.32">1</text>
+<text style="font-size:12.00px" x="672.0" y="225.32">Select</text>
+<text style="font-size:12.00px" x="672.0" y="239.32">word</text>
 </g>
 <g class="key" data-position="27" transform="rotate(0.0 736.0 208.0)">
-<title>&amp;kp N2</title>
+<title>&amp;select_line</title>
 <rect x="706.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="736.0" y="208.0">2</text>
+<text style="font-size:12.00px" x="736.0" y="201.0">Select</text>
+<text style="font-size:12.00px" x="736.0" y="215.0">line</text>
 </g>
 <g class="key" data-position="28" transform="rotate(0.0 800.0 224.0)">
-<title>&amp;kp N3</title>
+<title>&amp;kp LC(END)</title>
 <rect x="770.0" y="194.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="800.0" y="224.0">3</text>
+<text style="font-size:10.83px" x="800.0" y="224.0">Ctrl+End</text>
 </g>
 <g class="key" data-position="29" transform="rotate(0.0 864.0 272.0)">
-<title>&amp;kp N0</title>
+<title>&amp;kp LC(BSPC)</title>
 <rect x="834.0" y="242.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="864.0" y="272.0">0</text>
+<text style="font-size:9.63px" x="864.0" y="272.0">Ctrl+Bksp</text>
 </g>
 <g class="key transparent" data-position="30" transform="rotate(0.0 256.0 304.0)">
 <title>&amp;trans</title>
@@ -587,10 +597,12 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="316.8">Space</text>
 </g>
-<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;kp DOT</title>
+<g class="key dual" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;skq LSHIFT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">.</text>
+<text style="font-size:12.00px" x="640.0" y="294.0">Sticky</text>
+<text style="font-size:12.00px" x="640.0" y="308.0">Shift</text>
+<text class="hold" x="640.0" y="326.0">Shift</text>
 </g>
 </g><g class="layer" data-layer="sym" transform="translate(24 0)">
 <text class="layer-title" x="0" y="24">SYM</text>
@@ -695,9 +707,9 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="864.0" y="208.0">+</text>
 </g>
 <g class="key" data-position="20" transform="rotate(0.0 32.0 272.0)">
-<title>&amp;kp CAPS</title>
+<title>&amp;kp SQT</title>
 <rect x="2.0" y="242.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:9.63px" x="32.0" y="272.0">Caps Lock</text>
+<text style="font-size:12.00px" x="32.0" y="272.0">&#x27;</text>
 </g>
 <g class="key" data-position="21" transform="rotate(0.0 96.0 224.0)">
 <title>&amp;kp GRAVE</title>
@@ -747,10 +759,10 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="834.0" y="242.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="864.0" y="272.0">\</text>
 </g>
-<g class="key transparent" data-position="30" transform="rotate(0.0 256.0 304.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="30" transform="rotate(0.0 256.0 304.0)">
+<title>&amp;kp DQT</title>
 <rect x="226.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="256.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="256.0" y="304.0">&quot;</text>
 </g>
 <g class="key" data-position="31" transform="rotate(0.0 320.0 316.8)">
 <title>&amp;kp RET</title>
@@ -772,10 +784,12 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="316.8">▽</text>
 </g>
-<g class="key transparent" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;trans</title>
+<g class="key dual" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;skq LSHIFT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="640.0" y="294.0">Sticky</text>
+<text style="font-size:12.00px" x="640.0" y="308.0">Shift</text>
+<text class="hold" x="640.0" y="326.0">Shift</text>
 </g>
 </g><g class="layer" data-layer="func" transform="translate(24 0)">
 <text class="layer-title" x="0" y="24">FUNC</text>
@@ -970,20 +984,22 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="32.0" y="137.0">Unlock</text>
 <text style="font-size:12.00px" x="32.0" y="151.0">Studio</text>
 </g>
-<g class="key transparent" data-position="1" transform="rotate(0.0 96.0 96.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="1" transform="rotate(0.0 96.0 96.0)">
+<title>&amp;num_word NUMWORD</title>
 <rect x="66.0" y="66.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="96.0">▽</text>
+<text style="font-size:12.00px" x="96.0" y="89.0">Auto</text>
+<text style="font-size:12.00px" x="96.0" y="103.0">Numword</text>
 </g>
-<g class="key transparent" data-position="2" transform="rotate(0.0 160.0 80.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="2" transform="rotate(0.0 160.0 80.0)">
+<title>&amp;tog NUMRHT</title>
 <rect x="130.0" y="50.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="160.0" y="80.0">▽</text>
+<text style="font-size:12.00px" x="160.0" y="73.0">Lock</text>
+<text style="font-size:9.63px" x="160.0" y="87.0">NUM right</text>
 </g>
-<g class="key transparent" data-position="3" transform="rotate(0.0 224.0 104.32)">
-<title>&amp;trans</title>
+<g class="key" data-position="3" transform="rotate(0.0 224.0 104.32)">
+<title>&amp;kp CAPS</title>
 <rect x="194.0" y="74.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="224.0" y="104.32">▽</text>
+<text style="font-size:9.63px" x="224.0" y="104.32">Caps Lock</text>
 </g>
 <g class="key transparent" data-position="4" transform="rotate(0.0 288.0 112.0)">
 <title>&amp;trans</title>
@@ -1149,7 +1165,7 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text style="font-size:12.00px" x="640.0" y="304.0">▽</text>
 </g>
 </g><g class="layer" data-layer="numlft" transform="translate(24 0)">
-<text class="layer-title" x="0" y="24">NUMLFT</text>
+<text class="layer-title" x="0" y="24">NUM left</text>
 <g class="key" data-position="0" transform="rotate(0.0 32.0 144.0)">
 <title>&amp;mkp MCLK</title>
 <rect x="2.0" y="114.0" width="60.0" height="60.0" rx="7"/>
@@ -1170,10 +1186,10 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="194.0" y="74.32" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="224.0" y="104.32">9</text>
 </g>
-<g class="key transparent" data-position="4" transform="rotate(0.0 288.0 112.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="4" transform="rotate(0.0 288.0 112.0)">
+<title>&amp;kp MINUS</title>
 <rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="288.0" y="112.0">▽</text>
+<text style="font-size:12.00px" x="288.0" y="112.0">−</text>
 </g>
 <g class="key transparent" data-position="5" transform="rotate(0.0 608.0 112.0)">
 <title>&amp;trans</title>
@@ -1195,10 +1211,11 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="770.0" y="66.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="800.0" y="96.0">▽</text>
 </g>
-<g class="key transparent" data-position="9" transform="rotate(0.0 864.0 144.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="9" transform="rotate(0.0 864.0 144.0)">
+<title>&amp;num_exit</title>
 <rect x="834.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="864.0" y="144.0">▽</text>
+<text style="font-size:12.00px" x="864.0" y="137.0">Esc</text>
+<text style="font-size:8.67px" x="864.0" y="151.0">/ exit NUM</text>
 </g>
 <g class="key" data-position="10" transform="rotate(0.0 32.0 208.0)">
 <title>&amp;mkp LCLK</title>
@@ -1221,35 +1238,35 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="194.0" y="138.32" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="224.0" y="168.32">6</text>
 </g>
-<g class="key transparent" data-position="14" transform="rotate(0.0 288.0 176.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="14" transform="rotate(0.0 288.0 176.0)">
+<title>&amp;kp PLUS</title>
 <rect x="258.0" y="146.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="288.0" y="176.0">▽</text>
+<text style="font-size:12.00px" x="288.0" y="176.0">+</text>
 </g>
 <g class="key transparent" data-position="15" transform="rotate(0.0 608.0 176.0)">
 <title>&amp;trans</title>
 <rect x="578.0" y="146.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="608.0" y="176.0">▽</text>
 </g>
-<g class="key transparent" data-position="16" transform="rotate(0.0 672.0 168.32)">
-<title>&amp;trans</title>
+<g class="key" data-position="16" transform="rotate(0.0 672.0 168.32)">
+<title>&amp;kp RSHIFT</title>
 <rect x="642.0" y="138.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="672.0" y="168.32">▽</text>
+<text style="font-size:12.00px" x="672.0" y="168.32">Shift</text>
 </g>
-<g class="key transparent" data-position="17" transform="rotate(0.0 736.0 144.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="17" transform="rotate(0.0 736.0 144.0)">
+<title>&amp;kp RALT</title>
 <rect x="706.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="736.0" y="144.0">▽</text>
+<text style="font-size:12.00px" x="736.0" y="144.0">AltGr</text>
 </g>
-<g class="key transparent" data-position="18" transform="rotate(0.0 800.0 160.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="18" transform="rotate(0.0 800.0 160.0)">
+<title>&amp;kp RGUI</title>
 <rect x="770.0" y="130.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="800.0" y="160.0">▽</text>
+<text style="font-size:12.00px" x="800.0" y="160.0">GUI</text>
 </g>
-<g class="key transparent" data-position="19" transform="rotate(0.0 864.0 208.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="19" transform="rotate(0.0 864.0 208.0)">
+<title>&amp;kp RCTL</title>
 <rect x="834.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="864.0" y="208.0">▽</text>
+<text style="font-size:12.00px" x="864.0" y="208.0">Ctrl</text>
 </g>
 <g class="key" data-position="20" transform="rotate(0.0 32.0 272.0)">
 <title>&amp;mkp RCLK</title>
@@ -1302,47 +1319,49 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="834.0" y="242.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="864.0" y="272.0">▽</text>
 </g>
-<g class="key transparent" data-position="30" transform="rotate(0.0 256.0 304.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="30" transform="rotate(0.0 256.0 304.0)">
+<title>&amp;kp DEL</title>
 <rect x="226.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="256.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="256.0" y="304.0">Delete</text>
 </g>
-<g class="key transparent" data-position="31" transform="rotate(0.0 320.0 316.8)">
-<title>&amp;trans</title>
+<g class="key" data-position="31" transform="rotate(0.0 320.0 316.8)">
+<title>&amp;kp RET</title>
 <rect x="290.0" y="286.8" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="320.0" y="316.8">▽</text>
+<text style="font-size:12.00px" x="320.0" y="316.8">Enter</text>
 </g>
-<g class="key transparent" data-position="32" transform="rotate(0.0 384.0 343.04)">
-<title>&amp;trans</title>
+<g class="key" data-position="32" transform="rotate(0.0 384.0 343.04)">
+<title>&amp;kp TAB</title>
 <rect x="354.0" y="313.04" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="384.0" y="343.04">▽</text>
+<text style="font-size:12.00px" x="384.0" y="343.04">Tab</text>
 </g>
-<g class="key transparent" data-position="33" transform="rotate(0.0 512.0 343.04)">
-<title>&amp;trans</title>
+<g class="key" data-position="33" transform="rotate(0.0 512.0 343.04)">
+<title>&amp;kp BSPC</title>
 <rect x="482.0" y="313.04" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="512.0" y="343.04">▽</text>
+<text style="font-size:12.00px" x="512.0" y="343.04">Bksp</text>
 </g>
-<g class="key transparent" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;trans</title>
+<g class="key" data-position="34" transform="rotate(0.0 576.0 316.8)">
+<title>&amp;kp SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="576.0" y="316.8">▽</text>
+<text style="font-size:12.00px" x="576.0" y="316.8">Space</text>
 </g>
-<g class="key transparent" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;kp DOT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="640.0" y="304.0">.</text>
 </g>
 </g><g class="layer" data-layer="numrht" transform="translate(24 0)">
-<text class="layer-title" x="0" y="24">NUMRHT</text>
-<g class="key transparent" data-position="0" transform="rotate(0.0 32.0 144.0)">
-<title>&amp;trans</title>
+<text class="layer-title" x="0" y="24">NUM right</text>
+<g class="key" data-position="0" transform="rotate(0.0 32.0 144.0)">
+<title>&amp;num_exit</title>
 <rect x="2.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="32.0" y="144.0">▽</text>
+<text style="font-size:12.00px" x="32.0" y="137.0">Esc</text>
+<text style="font-size:8.67px" x="32.0" y="151.0">/ exit NUM</text>
 </g>
-<g class="key transparent" data-position="1" transform="rotate(0.0 96.0 96.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="1" transform="rotate(0.0 96.0 96.0)">
+<title>&amp;tog NUMRHT</title>
 <rect x="66.0" y="66.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="96.0">▽</text>
+<text style="font-size:12.00px" x="96.0" y="89.0">Lock</text>
+<text style="font-size:9.63px" x="96.0" y="103.0">NUM right</text>
 </g>
 <g class="key transparent" data-position="2" transform="rotate(0.0 160.0 80.0)">
 <title>&amp;trans</title>
@@ -1359,10 +1378,10 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="288.0" y="112.0">▽</text>
 </g>
-<g class="key transparent" data-position="5" transform="rotate(0.0 608.0 112.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="5" transform="rotate(0.0 608.0 112.0)">
+<title>&amp;kp ASTRK</title>
 <rect x="578.0" y="82.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="112.0">▽</text>
+<text style="font-size:12.00px" x="608.0" y="112.0">*</text>
 </g>
 <g class="key" data-position="6" transform="rotate(0.0 672.0 104.32)">
 <title>&amp;kp N7</title>
@@ -1384,35 +1403,35 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="834.0" y="114.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="864.0" y="144.0">−</text>
 </g>
-<g class="key transparent" data-position="10" transform="rotate(0.0 32.0 208.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="10" transform="rotate(0.0 32.0 208.0)">
+<title>&amp;kp LCTL</title>
 <rect x="2.0" y="178.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="32.0" y="208.0">▽</text>
+<text style="font-size:12.00px" x="32.0" y="208.0">Ctrl</text>
 </g>
-<g class="key transparent" data-position="11" transform="rotate(0.0 96.0 160.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="11" transform="rotate(0.0 96.0 160.0)">
+<title>&amp;kp LGUI</title>
 <rect x="66.0" y="130.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="96.0" y="160.0">▽</text>
+<text style="font-size:12.00px" x="96.0" y="160.0">GUI</text>
 </g>
-<g class="key transparent" data-position="12" transform="rotate(0.0 160.0 144.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="12" transform="rotate(0.0 160.0 144.0)">
+<title>&amp;kp LALT</title>
 <rect x="130.0" y="114.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="160.0" y="144.0">▽</text>
+<text style="font-size:12.00px" x="160.0" y="144.0">Alt</text>
 </g>
-<g class="key transparent" data-position="13" transform="rotate(0.0 224.0 168.32)">
-<title>&amp;trans</title>
+<g class="key" data-position="13" transform="rotate(0.0 224.0 168.32)">
+<title>&amp;kp LSHIFT</title>
 <rect x="194.0" y="138.32" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="224.0" y="168.32">▽</text>
+<text style="font-size:12.00px" x="224.0" y="168.32">Shift</text>
 </g>
 <g class="key transparent" data-position="14" transform="rotate(0.0 288.0 176.0)">
 <title>&amp;trans</title>
 <rect x="258.0" y="146.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="288.0" y="176.0">▽</text>
 </g>
-<g class="key transparent" data-position="15" transform="rotate(0.0 608.0 176.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="15" transform="rotate(0.0 608.0 176.0)">
+<title>&amp;kp FSLH</title>
 <rect x="578.0" y="146.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="176.0">▽</text>
+<text style="font-size:12.00px" x="608.0" y="176.0">/</text>
 </g>
 <g class="key" data-position="16" transform="rotate(0.0 672.0 168.32)">
 <title>&amp;kp N4</title>
@@ -1459,10 +1478,10 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="258.0" y="210.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="288.0" y="240.0">▽</text>
 </g>
-<g class="key transparent" data-position="25" transform="rotate(0.0 608.0 240.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="25" transform="rotate(0.0 608.0 240.0)">
+<title>&amp;kp EQUAL</title>
 <rect x="578.0" y="210.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="608.0" y="240.0">▽</text>
+<text style="font-size:12.00px" x="608.0" y="240.0">=</text>
 </g>
 <g class="key" data-position="26" transform="rotate(0.0 672.0 232.32)">
 <title>&amp;kp N1</title>
@@ -1484,35 +1503,219 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <rect x="834.0" y="242.0" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="864.0" y="272.0">0</text>
 </g>
-<g class="key transparent" data-position="30" transform="rotate(0.0 256.0 304.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="30" transform="rotate(0.0 256.0 304.0)">
+<title>&amp;kp DEL</title>
 <rect x="226.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="256.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="256.0" y="304.0">Delete</text>
 </g>
-<g class="key transparent" data-position="31" transform="rotate(0.0 320.0 316.8)">
-<title>&amp;trans</title>
+<g class="key" data-position="31" transform="rotate(0.0 320.0 316.8)">
+<title>&amp;kp RET</title>
 <rect x="290.0" y="286.8" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="320.0" y="316.8">▽</text>
+<text style="font-size:12.00px" x="320.0" y="316.8">Enter</text>
 </g>
-<g class="key transparent" data-position="32" transform="rotate(0.0 384.0 343.04)">
-<title>&amp;trans</title>
+<g class="key" data-position="32" transform="rotate(0.0 384.0 343.04)">
+<title>&amp;kp TAB</title>
 <rect x="354.0" y="313.04" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="384.0" y="343.04">▽</text>
+<text style="font-size:12.00px" x="384.0" y="343.04">Tab</text>
 </g>
-<g class="key transparent" data-position="33" transform="rotate(0.0 512.0 343.04)">
-<title>&amp;trans</title>
+<g class="key" data-position="33" transform="rotate(0.0 512.0 343.04)">
+<title>&amp;kp BSPC</title>
 <rect x="482.0" y="313.04" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="512.0" y="343.04">▽</text>
+<text style="font-size:12.00px" x="512.0" y="343.04">Bksp</text>
 </g>
-<g class="key transparent" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;trans</title>
+<g class="key" data-position="34" transform="rotate(0.0 576.0 316.8)">
+<title>&amp;kp SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="576.0" y="316.8">▽</text>
+<text style="font-size:12.00px" x="576.0" y="316.8">Space</text>
 </g>
-<g class="key transparent" data-position="35" transform="rotate(0.0 640.0 304.0)">
-<title>&amp;trans</title>
+<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;kp DOT</title>
 <rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
-<text style="font-size:12.00px" x="640.0" y="304.0">▽</text>
+<text style="font-size:12.00px" x="640.0" y="304.0">.</text>
+</g>
+</g><g class="layer" data-layer="numword" transform="translate(24 0)">
+<text class="layer-title" x="0" y="24">Numword</text>
+<g class="key" data-position="0" transform="rotate(0.0 32.0 144.0)">
+<title>&amp;num_exit</title>
+<rect x="2.0" y="114.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="32.0" y="137.0">Esc</text>
+<text style="font-size:8.67px" x="32.0" y="151.0">/ exit NUM</text>
+</g>
+<g class="key" data-position="1" transform="rotate(0.0 96.0 96.0)">
+<title>&amp;num_word NUMWORD</title>
+<rect x="66.0" y="66.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="96.0" y="89.0">Auto</text>
+<text style="font-size:12.00px" x="96.0" y="103.0">Numword</text>
+</g>
+<g class="key transparent" data-position="2" transform="rotate(0.0 160.0 80.0)">
+<title>&amp;trans</title>
+<rect x="130.0" y="50.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="160.0" y="80.0">▽</text>
+</g>
+<g class="key transparent" data-position="3" transform="rotate(0.0 224.0 104.32)">
+<title>&amp;trans</title>
+<rect x="194.0" y="74.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="224.0" y="104.32">▽</text>
+</g>
+<g class="key transparent" data-position="4" transform="rotate(0.0 288.0 112.0)">
+<title>&amp;trans</title>
+<rect x="258.0" y="82.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="288.0" y="112.0">▽</text>
+</g>
+<g class="key" data-position="5" transform="rotate(0.0 608.0 112.0)">
+<title>&amp;kp ASTRK</title>
+<rect x="578.0" y="82.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="608.0" y="112.0">*</text>
+</g>
+<g class="key" data-position="6" transform="rotate(0.0 672.0 104.32)">
+<title>&amp;kp N7</title>
+<rect x="642.0" y="74.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="672.0" y="104.32">7</text>
+</g>
+<g class="key" data-position="7" transform="rotate(0.0 736.0 80.0)">
+<title>&amp;kp N8</title>
+<rect x="706.0" y="50.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="736.0" y="80.0">8</text>
+</g>
+<g class="key" data-position="8" transform="rotate(0.0 800.0 96.0)">
+<title>&amp;kp N9</title>
+<rect x="770.0" y="66.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="800.0" y="96.0">9</text>
+</g>
+<g class="key" data-position="9" transform="rotate(0.0 864.0 144.0)">
+<title>&amp;kp MINUS</title>
+<rect x="834.0" y="114.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="864.0" y="144.0">−</text>
+</g>
+<g class="key transparent" data-position="10" transform="rotate(0.0 32.0 208.0)">
+<title>&amp;trans</title>
+<rect x="2.0" y="178.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="32.0" y="208.0">▽</text>
+</g>
+<g class="key transparent" data-position="11" transform="rotate(0.0 96.0 160.0)">
+<title>&amp;trans</title>
+<rect x="66.0" y="130.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="96.0" y="160.0">▽</text>
+</g>
+<g class="key transparent" data-position="12" transform="rotate(0.0 160.0 144.0)">
+<title>&amp;trans</title>
+<rect x="130.0" y="114.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="160.0" y="144.0">▽</text>
+</g>
+<g class="key transparent" data-position="13" transform="rotate(0.0 224.0 168.32)">
+<title>&amp;trans</title>
+<rect x="194.0" y="138.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="224.0" y="168.32">▽</text>
+</g>
+<g class="key transparent" data-position="14" transform="rotate(0.0 288.0 176.0)">
+<title>&amp;trans</title>
+<rect x="258.0" y="146.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="288.0" y="176.0">▽</text>
+</g>
+<g class="key" data-position="15" transform="rotate(0.0 608.0 176.0)">
+<title>&amp;kp FSLH</title>
+<rect x="578.0" y="146.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="608.0" y="176.0">/</text>
+</g>
+<g class="key" data-position="16" transform="rotate(0.0 672.0 168.32)">
+<title>&amp;kp N4</title>
+<rect x="642.0" y="138.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="672.0" y="168.32">4</text>
+</g>
+<g class="key" data-position="17" transform="rotate(0.0 736.0 144.0)">
+<title>&amp;kp N5</title>
+<rect x="706.0" y="114.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="736.0" y="144.0">5</text>
+</g>
+<g class="key" data-position="18" transform="rotate(0.0 800.0 160.0)">
+<title>&amp;kp N6</title>
+<rect x="770.0" y="130.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="800.0" y="160.0">6</text>
+</g>
+<g class="key" data-position="19" transform="rotate(0.0 864.0 208.0)">
+<title>&amp;kp PLUS</title>
+<rect x="834.0" y="178.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="864.0" y="208.0">+</text>
+</g>
+<g class="key transparent" data-position="20" transform="rotate(0.0 32.0 272.0)">
+<title>&amp;trans</title>
+<rect x="2.0" y="242.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="32.0" y="272.0">▽</text>
+</g>
+<g class="key transparent" data-position="21" transform="rotate(0.0 96.0 224.0)">
+<title>&amp;trans</title>
+<rect x="66.0" y="194.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="96.0" y="224.0">▽</text>
+</g>
+<g class="key transparent" data-position="22" transform="rotate(0.0 160.0 208.0)">
+<title>&amp;trans</title>
+<rect x="130.0" y="178.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="160.0" y="208.0">▽</text>
+</g>
+<g class="key transparent" data-position="23" transform="rotate(0.0 224.0 232.32)">
+<title>&amp;trans</title>
+<rect x="194.0" y="202.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="224.0" y="232.32">▽</text>
+</g>
+<g class="key transparent" data-position="24" transform="rotate(0.0 288.0 240.0)">
+<title>&amp;trans</title>
+<rect x="258.0" y="210.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="288.0" y="240.0">▽</text>
+</g>
+<g class="key" data-position="25" transform="rotate(0.0 608.0 240.0)">
+<title>&amp;kp EQUAL</title>
+<rect x="578.0" y="210.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="608.0" y="240.0">=</text>
+</g>
+<g class="key" data-position="26" transform="rotate(0.0 672.0 232.32)">
+<title>&amp;kp N1</title>
+<rect x="642.0" y="202.32" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="672.0" y="232.32">1</text>
+</g>
+<g class="key" data-position="27" transform="rotate(0.0 736.0 208.0)">
+<title>&amp;kp N2</title>
+<rect x="706.0" y="178.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="736.0" y="208.0">2</text>
+</g>
+<g class="key" data-position="28" transform="rotate(0.0 800.0 224.0)">
+<title>&amp;kp N3</title>
+<rect x="770.0" y="194.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="800.0" y="224.0">3</text>
+</g>
+<g class="key" data-position="29" transform="rotate(0.0 864.0 272.0)">
+<title>&amp;kp N0</title>
+<rect x="834.0" y="242.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="864.0" y="272.0">0</text>
+</g>
+<g class="key" data-position="30" transform="rotate(0.0 256.0 304.0)">
+<title>&amp;kp DEL</title>
+<rect x="226.0" y="274.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="256.0" y="304.0">Delete</text>
+</g>
+<g class="key" data-position="31" transform="rotate(0.0 320.0 316.8)">
+<title>&amp;kp RET</title>
+<rect x="290.0" y="286.8" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="320.0" y="316.8">Enter</text>
+</g>
+<g class="key" data-position="32" transform="rotate(0.0 384.0 343.04)">
+<title>&amp;kp TAB</title>
+<rect x="354.0" y="313.04" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="384.0" y="343.04">Tab</text>
+</g>
+<g class="key" data-position="33" transform="rotate(0.0 512.0 343.04)">
+<title>&amp;kp BSPC</title>
+<rect x="482.0" y="313.04" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="512.0" y="343.04">Bksp</text>
+</g>
+<g class="key" data-position="34" transform="rotate(0.0 576.0 316.8)">
+<title>&amp;kp SPACE</title>
+<rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="576.0" y="316.8">Space</text>
+</g>
+<g class="key" data-position="35" transform="rotate(0.0 640.0 304.0)">
+<title>&amp;kp DOT</title>
+<rect x="610.0" y="274.0" width="60.0" height="60.0" rx="7"/>
+<text style="font-size:12.00px" x="640.0" y="304.0">.</text>
 </g>
 </g></svg>
 <p>Tap the main label; hold for the green label. ▽ falls through to an underlying active layer.
@@ -1520,11 +1723,21 @@ Hover a key to see its ZMK binding. Hold labels on the base layer show how to re
 <aside><p><strong>Home-row modifiers:</strong> use the modifier on the opposite hand to your target key.
 After typing, pause briefly before a shortcut. Same-hand shortcuts need a deliberate hold.
 Tap then quickly hold a letter to repeat it.</p>
-<p><strong>Configured timings:</strong> Left: hold 280 ms, prior idle 150 ms, quick tap 175 ms; Right: hold 280 ms, prior idle 150 ms, quick tap 175 ms.</p>
+<p><strong>Configured timings:</strong> Left: hold 280 ms, prior idle 150 ms, quick tap 175 ms; Right: hold 280 ms, prior idle 150 ms, quick tap 175 ms; Space/SYM: hold 200 ms, retro-tap on; Backspace/MEDIA: hold 200 ms, quick tap 400 ms; Left letter/NUM: hold 280 ms, prior idle 150 ms, quick tap 175 ms; Right letter/NUM: hold 280 ms, prior idle 150 ms, quick tap 175 ms; Sticky Shift: timeout 1500 ms, release on next press.</p>
 <p><strong>Combos (base key labels):</strong> Z + X → Ctrl+Z (default, colemak; chord window 50 ms; prior idle 150 ms).</p>
 <p><strong>Studio:</strong> Hold Bksp and press Q to unlock editing.</p>
 <p><strong>Base layout:</strong> Hold Bksp and press Z to select Colemak-DH. Hold Bksp and press X to select QWERTY. QWERTY is selected at startup.
 The diagram selector only changes this reference; use the keyboard shortcuts to switch the actual keyboard.</p>
+<p><strong>Numbers:</strong> the top inner letter on either half holds the opposite numpad.
+Hold Bksp and press W: Auto Numword. Hold Bksp and press E / Colemak F: Lock NUM right. On NUM right, press W: Lock NUM right. On Numword, press W: Auto Numword. Numword exits on Space, Enter, Tab or other non-continuation input.
+Numeric thumbs are plain keys; Backspace repeats. Esc / exit NUM sends Escape and leaves
+numeric modes, keeping your chosen base layout. Exit one numeric mode before entering the other.</p>
+<p><strong>Editing:</strong> hold Enter for right-hand arrows and plain left-hand modifiers.
+Word/line selection uses Linux/Windows application shortcuts; macro sequences are listed below.
+The outer right thumb is sticky Shift (or normal Shift while held).
+Under SYM, quote is on Z and double quote on the leftmost thumb, opposite the Space/SYM hold.
+Tap Backspace then quickly hold it for repetition; a normal hold still activates MEDIA.</p>
+<p><strong>Macro actions:</strong> Select Word: Ctrl+→ then Ctrl+← then Ctrl+Shift+→ (tap 40 ms, wait 40 ms); Select Line: Home then Shift+End (tap 40 ms, wait 40 ms); Clear Terminal Line: Ctrl+E then Ctrl+U (tap 40 ms, wait 40 ms); Escape / Exit Numbers: Exit NUM left then Exit NUM right then Exit Numword then Esc (tap 40 ms, wait 0 ms).</p>
 <p>This reference shows the firmware defaults. Changes saved in ZMK Studio are stored on the keyboard
 and are not reflected here. Use the SVG file for printing all layers.</p></aside>
 <script>
