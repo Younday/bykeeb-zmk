@@ -55,6 +55,14 @@ class ReferenceChanges(unittest.TestCase):
         output = self.changed_outputs(r'(bsp: backspace_media\s*\{[\s\S]*?quick-tap-ms\s*=\s*<)\d+', r'\g<1>225')
         self.assertIn('Backspace/MEDIA: hold 200 ms, quick tap 225 ms', output['docs/layout.html'])
 
+    def test_space_timing(self):
+        output = self.changed_outputs(r'(spc: space_symbols\s*\{[\s\S]*?tapping-term-ms\s*=\s*<)\d+', r'\g<1>300')
+        self.assertIn('Space/SYM: hold 300 ms, retro-tap on', output['docs/layout.html'])
+
+    def test_space_retro_tap_reference_follows_setting(self):
+        output = self.changed_outputs(r'^\s*retro-tap;', '')
+        self.assertIn('Space/SYM: hold 200 ms, retro-tap off', output['docs/layout.html'])
+
     def test_sticky_shift_timeout(self):
         output = self.changed_outputs(r'(release-after-ms\s*=\s*<)\d+', r'\g<1>1800')
         self.assertIn('Sticky Shift: timeout 1800 ms', output['docs/layout.html'])
@@ -184,7 +192,7 @@ class ErgonomicLayers(unittest.TestCase):
     def test_sticky_shift_and_quote_are_reachable_on_both_bases(self):
         for name in ['default', 'colemak']:
             self.assertEqual(self.raw[name][35], '&skq LSHIFT')
-            self.assertEqual(self.raw[name][34], '&lt SYM SPACE')
+            self.assertEqual(self.raw[name][34], '&spc SYM SPACE')
         self.assertEqual(self.raw['sym'][20], '&kp SQT')
         self.assertEqual(self.raw['sym'][30], '&kp DQT')
         self.assertEqual(self.raw['sym'][35], '&skq LSHIFT')

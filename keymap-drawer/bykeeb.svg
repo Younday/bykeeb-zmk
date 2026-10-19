@@ -195,7 +195,7 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text class="hold" x="512.0" y="365.04">MEDIA</text>
 </g>
 <g class="key dual" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;lt SYM SPACE</title>
+<title>&amp;spc SYM SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="313.8">Space</text>
 <text class="hold" x="576.0" y="338.8">SYM</text>
@@ -394,7 +394,7 @@ text {fill:currentColor;text-anchor:middle;dominant-baseline:middle}
 <text class="hold" x="512.0" y="365.04">MEDIA</text>
 </g>
 <g class="key dual" data-position="34" transform="rotate(0.0 576.0 316.8)">
-<title>&amp;lt SYM SPACE</title>
+<title>&amp;spc SYM SPACE</title>
 <rect x="546.0" y="286.8" width="60.0" height="60.0" rx="7"/>
 <text style="font-size:12.00px" x="576.0" y="313.8">Space</text>
 <text class="hold" x="576.0" y="338.8">SYM</text>

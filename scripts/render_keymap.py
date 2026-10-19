@@ -15,8 +15,8 @@ ARITY = {"kp": 1, "hml": 2, "hmr": 2, "lt": 2, "trans": 0,
          "ext_power": 1, "out": 1, "mkp": 1, "studio_unlock": 0, "to": 1,
          "nml": 2, "nmr": 2, "bsp": 2, "skq": 1, "tog": 1, "num_word": 1,
          "num_off": 1, "select_word": 0, "select_line": 0, "clear_line": 0, "num_exit": 0,
-         "macro_press": 0, "macro_tap": 0}
-LAYER_TAPS = {"lt", "nml", "nmr", "bsp"}
+         "macro_press": 0, "macro_tap": 0, "spc": 2}
+LAYER_TAPS = {"lt", "nml", "nmr", "bsp", "spc"}
 LAYER_LABELS = {"default": "QWERTY", "colemak": "Colemak-DH",
                 "numlft": "NUM left", "numrht": "NUM right", "numword": "Numword"}
 ACTION_LABELS = {"caps_word": "Caps Word", "bootloader": "Bootloader",
@@ -25,6 +25,7 @@ ACTION_LABELS = {"caps_word": "Caps Word", "bootloader": "Bootloader",
                  "clear_line": "Clear term line", "num_exit": "Esc / exit NUM",
                  "macro_press": "Press actions", "macro_tap": "Tap actions"}
 HOLD_NODES = {"homerow_mod_left": "Left", "homerow_mod_right": "Right",
+              "space_symbols": "Space/SYM",
               "backspace_media": "Backspace/MEDIA", "number_hold_left": "Left letter/NUM",
               "number_hold_right": "Right letter/NUM"}
 LABELS = {
@@ -157,10 +158,14 @@ def reference_metadata(layers, raw):
             for prop in ("tapping-term-ms", "require-prior-idle-ms", "quick-tap-ms"):
                 match = re.search(rf"{prop}\s*=\s*<(\d+)>;", body)
                 if not match:
+                    if node == "space_symbols" and prop != "tapping-term-ms":
+                        continue
                     if prop == "require-prior-idle-ms" and node == "backspace_media":
                         continue
                     raise ValueError(f"Missing {prop} in {node}")
                 values[prop] = int(match[1])
+            if node == "space_symbols":
+                values['retro-tap'] = bool(re.search(r'\bretro-tap\s*;', body))
             settings[node] = values
         if node == "sticky_shift":
             timeout = re.search(r"release-after-ms\s*=\s*<(\d+)>;", body)
@@ -182,7 +187,10 @@ def reference_metadata(layers, raw):
         parts = [f"hold {values['tapping-term-ms']} ms"]
         if 'require-prior-idle-ms' in values:
             parts.append(f"prior idle {values['require-prior-idle-ms']} ms")
-        parts.append(f"quick tap {values['quick-tap-ms']} ms")
+        if 'quick-tap-ms' in values:
+            parts.append(f"quick tap {values['quick-tap-ms']} ms")
+        if 'retro-tap' in values:
+            parts.append('retro-tap ' + ('on' if values['retro-tap'] else 'off'))
         timings.append(f"{side}: " + ', '.join(parts))
     sticky = settings['sticky_shift']
     timings.append(f"Sticky Shift: timeout {sticky['timeout']} ms, " +

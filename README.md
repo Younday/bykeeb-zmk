@@ -182,6 +182,21 @@ delay has passed. This repeat setting
 is local to Backspace, not applied to Enter, Tab or Space. NAV, SYM and numeric
 layers also provide a plain repeating Backspace.
 
+## Space and Symbols
+
+Space/SYM uses [retro-tap](https://zmk.dev/docs/keymaps/behaviors/hold-tap#retro-tap)
+on both base layouts. Press Space alone and release it, even after more than
+200 ms: it sends one space instead of silently becoming a layer hold.
+To type symbols, hold Space for at least 200 ms, then press a symbol key while
+Space remains held. Symbols activate when another key is used, so holding Space
+alone no longer shows SYM in advance. Release Space between words; overlapping
+other keys with a long Space hold can still invoke Symbols.
+
+A single long hold sends one space on release; it does not start auto-repeat.
+Hold Enter/NAV for a plain Space key if you need repeated spaces. If you have
+saved Studio mappings, restore the firmware defaults or change the base Space
+bindings to **Space / Symbols**, with SYM as the hold layer and Space as the tap.
+
 ## Home-row modifier tuning
 
 The `hml` and `hmr` behaviors use the upstream-supported
@@ -291,6 +306,9 @@ has saved edits. Check both bases, then:
    Shift for multiple capitals; leave an unused tap idle past its timeout.
 7. Tap-then-hold Backspace: deletion repeats. A normal hold still accesses MEDIA.
    Check Studio unlock, Bluetooth profile selection and QWERTY/Colemak switching.
+8. On each base, hold Space alone for half a second, release: one space appears.
+   Then hold Space for at least 200 ms and tap Z: a quote appears without an extra
+   space. Check ordinary word spacing during continuous typing over Bluetooth.
 
 Firmware compilation and the reference regression tests do not substitute for
 these physical typing checks. The newly built pair is a candidate for testing.
